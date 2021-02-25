@@ -1,3 +1,69 @@
-<div *ngFor="let subscription of subscriptions">
-    {{subscription.subscriptionKey}}
+<div class="main-root">
+    <div class="main-space" *ngIf="subscriptions">
+        <div class="head-block">
+            <div class="search-block">
+                <input class="input-field" [(ngModel)]="subscriptions.searchValue" (ngModelChange)="subscriptions.OnSearchInit.next($event)" placeholder="Пошук">
+                <span *ngIf="subscriptions.searchValue" (click)="clearSearch()" class="material-icons clear-search-icon">close</span>
+            </div>
+        </div>
+        <div class="subscription-block">
+            <div *ngFor="let subscription of subscriptions.data" class="subscription-card-block">
+                <div (click)="subscription.open = !subscription.open" class="subscription-card">
+                    <span *ngIf="subscription.notifications.length" class="material-icons notifications-selector-icon" style="width: 5%;">{{subscription.open?"keyboard_arrow_up":"keyboard_arrow_down"}}</span>
+                    <div *ngIf="!subscription.notifications.length" style="width: 5%;"></div>
+                    <div class="info-block" style="width: 30%;">
+                        <div class="category">Об'єкт моніторингу</div>
+                        <div class="info">{{subscription.subscriptionKey}}</div>
+                    </div>
+
+                    <div class="info-block" style="width: 15%;">
+                        <div class="category">Останнє оновлення</div>
+                        <div class="info">{{subscription.notifications.length > 0 ? subscription.notifications[subscription.notifications.length - 1].date:"Оновлення відсутні"}}</div>
+                    </div>
+
+                    <div class="info-block" style="width: 25%;">
+                        <div class="category">Відповідальні особи</div>
+                        <div *ngFor="let user of subscription.users" class="info">{{user.name}}</div>
+                    </div>
+
+                    <div class="info-block" style="width: 15%;">
+                        <div class="category">Нові повідомлення</div>
+                        <div class="info">{{getUnreadNotificationsCount(subscription.notifications)}}</div>
+                    </div>
+                    <div class="icons-block" style="width: 6%;">
+                        <span *ngIf="!checkUsersInside(subscription.users)" class="material-icons action-icon">add_circle_outline</span>
+                        <span *ngIf="checkUsersInside(subscription.users) && subscription.users.length > 1" class="material-icons action-icon">remove_circle_outline</span>
+                        <span *ngIf="checkUsersInside(subscription.users) && subscription.users.length === 1" class="material-icons action-icon">delete</span>
+                    </div>
+                </div>
+                <div *ngIf="subscription.open" class="notifications-block">
+                    <div *ngFor="let notification of subscription.notifications" class="notification-card">
+                        <div class="info-block">
+                            <div class="category">Номер справи</div>
+                            <div class="info">{{notification.number}}</div>
+                        </div>
+
+                        <div class="info-block">
+                            <div class="category">Дата повідомлення</div>
+                            <div class="info">{{notification.date}}</div>
+                        </div>
+
+                        <div class="info-block">
+                            <div class="category">Статус</div>
+                            <div class="info" [ngStyle]="{'color': notification.read ? '#161616': '#d93128'}">{{notification.read ? "Переглянуто" : "Нове!"}}</div>
+                        </div>
+
+
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="pages-block">
+            <button [disabled]="subscriptions.pageIndex == 0" class="page-button" (click)="subscriptions.updatePageManual(0); scrollTop()">1</button>
+            <div class="page-dotes" *ngIf="subscriptions.pageIndex > 2 && subscriptions.totalPages > 5 ">...</div>
+            <button class="page-button" [disabled]="subscriptions.pageIndex == (i - 1)" *ngFor="let i of subscriptions.centreButtons" (click)="subscriptions.updatePageManual(i - 1); scrollTop()">{{i}}</button>
+            <div class="page-dotes" *ngIf="(subscriptions.pageIndex < (subscriptions.totalPages - 3)) && subscriptions.totalPages > 5 ">...</div>
+            <button [disabled]="subscriptions.pageIndex == ( subscriptions.totalPages - 1 )" class="page-button" *ngIf="subscriptions.totalPages > 1" (click)="subscriptions.updatePageManual(subscriptions.totalPages-1); scrollTop()">{{subscriptions.totalPages}}</button>
+        </div>
+    </div>
 </div>

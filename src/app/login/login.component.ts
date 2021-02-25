@@ -30,6 +30,7 @@ export class LoginComponent implements OnInit {
           console.log(user)
           localStorage.setItem('MAATUser', user.userID );
           this.mainService.user = user;
+          this.mainService.getSubscriptions$(user.companyID);
           this.mainService.navigate("main");
           this.closeLogin();
         } else {

@@ -1,1 +1,177 @@
 @import "../app.component.scss";
+.main-root {
+    width: 100%;
+    height: 100%;
+    .main-space {
+        @include flex(column, null, null);
+        position: relative;
+        width: 100%;
+        height: 100%;
+        .head-block {
+            @include flex(row, space-between, center);
+            width: calc(100% - 80px);
+            padding: 20px 40px;
+            background-color: $main-color;
+            border-bottom-left-radius: $box-radius;
+            border-bottom-right-radius: $box-radius;
+            box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+            z-index: 10;
+            .search-block {
+                width: 400px;
+                position: relative;
+                .input-field {
+                    @include custom-input;
+                    @include custom-scrollbar;
+                    width: calc(100% - 14px);
+                    height: 40px;
+                    font-family: $font-family;
+                    font-size: 25px !important;
+                    resize: none;
+                }
+                .clear-search-icon {
+                    position: absolute;
+                    top: 10px;
+                    right: 10px;
+                    display: block;
+                    font-size: 30px;
+                    color: $text-main-color;
+                    cursor: pointer;
+                    transition: 0.3s;
+                    &:hover {
+                        color: $action-color
+                    }
+                }
+            }
+        }
+        .subscription-block {
+            @include flex(column, null, null);
+            @include custom-scrollbar;
+            width: 100%;
+            height: 100%;
+            z-index: 5;
+            .subscription-card-block {
+                @include flex(column, null, null);
+                width: 100%;
+                .subscription-card {
+                    @include flex(row, space-between, center);
+                    background-color: $main-color;
+                    border-radius: $box-radius;
+                    margin: 10px 0px;
+                    padding: 20px 40px;
+                    width: calc(100% - 80px);
+                    box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+                    font-family: $font-family;
+                    cursor: pointer;
+                    .info-block {
+                        @include flex(column, null, null);
+                        .category {
+                            font-size: $addiction-text-size;
+                            color: $text-secondary-color
+                        }
+                        .info {
+                            font-size: $main-text-size;
+                            color: $text-main-color;
+                            margin-top: 10px
+                        }
+                    }
+                    .notifications-selector-icon {
+                        font-size: 40px;
+                        transition: 0.3s;
+                    }
+                    .icons-block {
+                        @include flex(row, center, center);
+                        .action-icon {
+                            display: none;
+                            font-size: 40px;
+                            transition: 0.3s;
+                            &:hover {
+                                color: $action-color;
+                            }
+                        }
+                    }
+                    &:hover {
+                        .notifications-selector-icon {
+                            color: $action-color;
+                        }
+                        .icons-block {
+                            .action-icon {
+                                display: block
+                            }
+                        }
+                    }
+                }
+                .notifications-block {
+                    @include flex(row, null, null);
+                    flex-wrap: wrap;
+                    width: 94%;
+                    padding-left: 6%;
+                    .notification-card {
+                        @include flex(row, space-between, null);
+                        flex-wrap: wrap;
+                        background-color: $main-color;
+                        border-radius: $box-radius;
+                        margin: 10px;
+                        padding: 20px;
+                        width: calc(30% - 40px);
+                        box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+                        font-family: $font-family;
+                        cursor: pointer;
+                        .info-block {
+                            @include flex(column, null, null);
+                            flex: none;
+                            width: 40%;
+                            margin-bottom: 10px;
+                            .category {
+                                font-size: $addiction-text-size;
+                                color: $text-secondary-color
+                            }
+                            .info {
+                                font-size: $main-text-size;
+                                color: $text-main-color;
+                                margin-top: 10px
+                            }
+                        }
+                    }
+                }
+            }
+        }
+        .pages-block {
+            @include flex(row, null, center);
+            width: calc(100% - 80px);
+            padding: 20px 40px;
+            background-color: $main-color;
+            border-top-left-radius: $box-radius;
+            border-top-right-radius: $box-radius;
+            box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+            z-index: 10;
+            .page-button {
+                font-size: 25px;
+                margin-right: 15px;
+                background-color: transparent;
+                border: none;
+                padding: 5px;
+                border: 2px solid $text-secondary-color;
+                border-radius: $box-radius;
+                cursor: pointer;
+                transition: 0.3s;
+                &:focus {
+                    outline: none;
+                    box-shadow: none;
+                }
+                &:hover:enabled {
+                    background-color: $text-secondary-color;
+                }
+                &:disabled {
+                    color: $text-main-color;
+                    border-color: $action-color;
+                }
+            }
+            .page-dotes {
+                font-size: 25px;
+                margin-right: 15px;
+                background-color: transparent;
+                border: none;
+            }
+        }
+    }
+}
