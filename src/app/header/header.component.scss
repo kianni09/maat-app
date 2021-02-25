@@ -1,0 +1,56 @@
+@import "../app.component.scss";
+.header-root {
+    width: 100%;
+    height: 100%;
+    .header-main {
+        width: 100%;
+        height: 100%;
+        @include flex(row, space-between, center);
+        .logo-block {
+            @include flex(row, null, center);
+            margin-left: 40px;
+            .header-name {
+                color: $main-color;
+                margin-right: 10px;
+                font-size: 35px;
+                font-family: $logo-font;
+            }
+        }
+        .user-block {
+            @include flex(row, null, center);
+            margin-right: 40px;
+            .user-labels {
+                @include flex(row, null, center);
+                .login-button {
+                    @include custom-button($main-color, $accept-color);
+                    margin-right: 20px;
+                }
+                .registration-button {
+                    @include custom-button($main-color, $action-color);
+                }
+                .exit-icon {
+                    display: block;
+                    font-size: 40px;
+                    color: $main-color;
+                    cursor: pointer;
+                    margin-left: 20px;
+                }
+                .user-name-block {
+                    @include flex(column, null, null);
+                    .user-name {
+                        color: $main-color;
+                        font-weight: 600;
+                        font-size: $title-text-size;
+                        font-family: $logo-font;
+                    }
+                    .query-limit {
+                        color: $main-color;
+                        font-size: $addiction-text-size;
+                        font-family: $logo-font;
+                        margin-top: 5px;
+                    }
+                }
+            }
+        }
+    }
+}

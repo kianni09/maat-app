@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { MainService } from './main.service';
 
 @Component({
   selector: 'app-root',
@@ -6,5 +7,18 @@ import { Component } from '@angular/core';
   styleUrls: ['./app.component.scss']
 })
 export class AppComponent {
-  title = 'maat-app';
+  constructor(private mainService: MainService) { }
+
+  get loginWindow () {
+    return this.mainService.loginWindow;
+  }
+
+  get registrationWindow () {
+    return this.mainService.registrationWindow;
+  }
+
+  get subscriptionWindow () {
+    return this.mainService.subscriptionWindow;
+  }
+
 }

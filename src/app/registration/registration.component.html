@@ -1,0 +1,36 @@
+<div class="window">
+    <span (click)="closeLogin()" class="material-icons close-icon">close</span>
+
+    <div class="input-block">
+        <div class="input-label">ПІБ</div>
+        <input [(ngModel)]="registrationForm.name" class="input-field" type="text" placeholder="Введіть ваш ПІБ" autocomplete="new-password">
+    </div>
+
+    <div class="input-block">
+        <div class="input-label">Ключ</div>
+        <input (ngModelChange)="companyIDValidation.next($event)" [(ngModel)]="registrationForm.companyID" class="input-field" type="text" placeholder="Введіть ваш ключ" autocomplete="new-password">
+        <div *ngIf="startCompanyIDCheck" [ngClass]="{'error-message': !companyIDCheck, 'done-message': companyIDCheck}">
+            {{companyIDChechResult}}
+        </div>
+    </div>
+
+    <div class="input-block">
+        <div class="input-label">Логін</div>
+        <input (ngModelChange)="loginValidation.next($event)" [(ngModel)]="registrationForm.login" class="input-field" type="text" placeholder="Введіть ваш логін" autocomplete="new-password">
+        <div *ngIf="startLoginCheck" [ngClass]="{'error-message': !loginCheck, 'done-message': loginCheck}">
+            {{loginChechResult}}
+        </div>
+    </div>
+
+    <div class="input-block">
+        <div class="input-label">Пароль</div>
+        <input [(ngModel)]="registrationForm.password" class="input-field" type="password" placeholder="Введіть ваш пароль" autocomplete="new-password">
+    </div>
+
+    <div *ngIf="errorMessage" class="error-message">Помилка, спробуйте пізніше</div>
+    <div *ngIf="doneMessage" class="done-message">Реєстрація користувача здійснена успішно!</div>
+    <div *ngIf="loadBar" class="load-animation"></div>
+    <div (click)="registration()" *ngIf="!loadBar && registrationAcception()" class="login-button">
+        Реєстрація
+    </div>
+</div>

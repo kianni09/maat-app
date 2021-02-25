@@ -1,0 +1,16 @@
+<div class="window">
+    <span (click)="closeLogin()" class="material-icons close-icon">close</span>
+    <div class="input-block">
+        <div class="input-label">Логін</div>
+        <input [(ngModel)]="loginForm.login" class="input-field" type="text" placeholder="Введіть ваш логін" autocomplete="new-password">
+    </div>
+    <div class="input-block">
+        <div class="input-label">Пароль</div>
+        <input [(ngModel)]="loginForm.password" class="input-field" type="password" placeholder="Введіть ваш пароль" autocomplete="new-password">
+    </div>
+    <div *ngIf="errorMessage" class="error-message">Логін або пароль невірні</div>
+    <div *ngIf="loadBar" class="load-animation"></div>
+    <div (click)="login()" *ngIf="!loadBar" class="login-button">
+        Вхід
+    </div>
+</div>

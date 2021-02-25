@@ -1,0 +1,21 @@
+<div class="header-root">
+    <div class="header-main">
+        <div class="logo-block">
+            <img width="45" height="45" src="/assets/img/logo-header.png" alt="Logo">
+            <div class="header-name">MAAT</div>
+        </div>
+        <div class="user-block">
+            <div *ngIf="!user" class="user-labels">
+                <div (click)="loginWindow()" class="login-button">Вхід</div>
+                <div (click)="registrationWindow()" class="registration-button">Реєстрація</div>
+            </div>
+            <div *ngIf="user" class="user-labels">
+                <div class="user-name-block">
+                    <div class="user-name">{{"Вітаємо, " + user.name}}</div>
+                    <div class="query-limit">{{"Моніторинг: " + subscriptionsCount + " / " + user.queryLimit }}</div>
+                </div>
+                <span (click)="exit()" class="material-icons exit-icon">exit_to_app</span>
+            </div>
+        </div>
+    </div>
+</div>
