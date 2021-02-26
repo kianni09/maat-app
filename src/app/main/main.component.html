@@ -5,8 +5,30 @@
                 <input class="input-field" [(ngModel)]="subscriptions.searchValue" (ngModelChange)="subscriptions.OnSearchInit.next($event)" placeholder="Пошук">
                 <span *ngIf="subscriptions.searchValue" (click)="clearSearch()" class="material-icons clear-search-icon">close</span>
             </div>
+
+            <div class="head-switcher">
+                <div class="switcher-trigger" [ngStyle]="{'left': subscriptionsSwitcher? '-1px':'149px'}"></div>
+                <div class="switcher-labels">
+                    <div (click)="switcherAction('self')" class="switcher-label" [ngStyle]="{'color': subscriptionsSwitcher? '#ffffff':'#161616'}">Власні</div>
+                    <div (click)="switcherAction('all')" class="switcher-label" [ngStyle]="{'color': !subscriptionsSwitcher? '#ffffff':'#161616'}">Всі</div>
+                </div>
+            </div>
+
+            <div class="buttons-block">
+                <div (click)="addMonitoringObject()" class="add-button">
+                    <span class="material-icons" style="margin-right: 5px;">add</span>
+                    <span>Додати</span>
+                </div>
+                <div (click)="updateSubscriptions()" class="update-button">
+                    <span class="material-icons" style="margin-right: 5px;">update</span>
+                    <span>Оновити</span>
+                </div>
+            </div>
+
+
         </div>
-        <div class="subscription-block">
+
+        <div *ngIf="!startLoad" class="subscription-block">
             <div *ngFor="let subscription of subscriptions.data" class="subscription-card-block">
                 <div (click)="subscription.open = !subscription.open" class="subscription-card">
                     <span *ngIf="subscription.notifications.length" class="material-icons notifications-selector-icon" style="width: 5%;">{{subscription.open?"keyboard_arrow_up":"keyboard_arrow_down"}}</span>
@@ -18,7 +40,7 @@
 
                     <div class="info-block" style="width: 15%;">
                         <div class="category">Останнє оновлення</div>
-                        <div class="info">{{subscription.notifications.length > 0 ? subscription.notifications[subscription.notifications.length - 1].date:"Оновлення відсутні"}}</div>
+                        <div class="info">{{subscription.notifications.length > 0 ? subscription.notifications[0].date:"Оновлення відсутні"}}</div>
                     </div>
 
                     <div class="info-block" style="width: 25%;">
@@ -52,18 +74,28 @@
                             <div class="category">Статус</div>
                             <div class="info" [ngStyle]="{'color': notification.read ? '#161616': '#d93128'}">{{notification.read ? "Переглянуто" : "Нове!"}}</div>
                         </div>
-
-
                     </div>
                 </div>
             </div>
         </div>
-        <div class="pages-block">
+
+        <div *ngIf="!startLoad" class="pages-block">
             <button [disabled]="subscriptions.pageIndex == 0" class="page-button" (click)="subscriptions.updatePageManual(0); scrollTop()">1</button>
             <div class="page-dotes" *ngIf="subscriptions.pageIndex > 2 && subscriptions.totalPages > 5 ">...</div>
             <button class="page-button" [disabled]="subscriptions.pageIndex == (i - 1)" *ngFor="let i of subscriptions.centreButtons" (click)="subscriptions.updatePageManual(i - 1); scrollTop()">{{i}}</button>
             <div class="page-dotes" *ngIf="(subscriptions.pageIndex < (subscriptions.totalPages - 3)) && subscriptions.totalPages > 5 ">...</div>
             <button [disabled]="subscriptions.pageIndex == ( subscriptions.totalPages - 1 )" class="page-button" *ngIf="subscriptions.totalPages > 1" (click)="subscriptions.updatePageManual(subscriptions.totalPages-1); scrollTop()">{{subscriptions.totalPages}}</button>
         </div>
+
+        <div *ngIf="startLoad" class="animation-back">
+            <div class="spinner">
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+            </div>
+        </div>
+
     </div>
 </div>

@@ -17,28 +17,81 @@
             box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
             z-index: 10;
             .search-block {
-                width: 400px;
+                width: 300px;
                 position: relative;
                 .input-field {
                     @include custom-input;
                     @include custom-scrollbar;
                     width: calc(100% - 14px);
-                    height: 40px;
+                    height: 20px;
                     font-family: $font-family;
-                    font-size: 25px !important;
+                    font-size: 20px !important;
                     resize: none;
                 }
                 .clear-search-icon {
                     position: absolute;
-                    top: 10px;
-                    right: 10px;
+                    top: 3px;
+                    right: 5px;
                     display: block;
-                    font-size: 30px;
+                    font-size: 25px;
                     color: $text-main-color;
                     cursor: pointer;
                     transition: 0.3s;
                     &:hover {
                         color: $action-color
+                    }
+                }
+            }
+            .head-switcher {
+                width: 300px;
+                height: 40px;
+                border: 1px solid $action-color;
+                border-radius: $box-radius;
+                position: relative;
+                z-index: 1;
+                .switcher-trigger {
+                    position: absolute;
+                    z-index: 5;
+                    width: 150px;
+                    height: 40px;
+                    border: 1px solid $action-color;
+                    border-radius: $box-radius;
+                    top: -1px;
+                    background-color: $action-color;
+                    transition: .4s;
+                }
+                .switcher-labels {
+                    @include flex(row, space-between, center);
+                    width: 300px;
+                    height: 40px;
+                    position: absolute;
+                    z-index: 10;
+                    .switcher-label {
+                        @include flex(row, center, center);
+                        width: 150px;
+                        height: 40px;
+                        color: $main-color;
+                        font-family: $font-family;
+                        font-size: 25px;
+                        cursor: pointer;
+                        user-select: none;
+                        transition: 0.4s
+                    }
+                }
+            }
+            .buttons-block {
+                @include flex(row, null, null);
+                .add-button {
+                    @include custom-button($text-main-color, $accept-color);
+                    margin-right: 20px;
+                }
+                .update-button {
+                    @include custom-button($text-main-color, $selection-color);
+                }
+                .add-button,
+                .update-button {
+                    &:hover {
+                        color: $main-color;
                     }
                 }
             }
@@ -145,8 +198,8 @@
             box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
             z-index: 10;
             .page-button {
-                font-size: 25px;
-                margin-right: 15px;
+                font-size: 18px;
+                margin-right: 10px;
                 background-color: transparent;
                 border: none;
                 padding: 5px;

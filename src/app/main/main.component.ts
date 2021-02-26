@@ -47,4 +47,28 @@ export class MainComponent implements OnInit {
       return user.userID === this.user.userID;
     } )
   }
+
+  get subscriptionsSwitcher(): boolean {
+    return this.mainService.subscriptionsSwitcher;
+  }
+
+  public switcherAction(action: string): void {
+    this.mainService.subscriptionsSwitcher = action === "self";
+    this.mainService.subscriptionsCategory();
+    this.scrollTop();
+  }
+
+  get startLoad(): boolean {
+    return this.mainService.startLoadSubscriptions;
+  }
+
+  public addMonitoringObject(): void {
+    this.mainService.subscriptionWindow = true;
+  }
+
+  public updateSubscriptions (): void {
+    this.mainService.getSubscriptions$(this.user.companyID);
+  }
+
+
 }

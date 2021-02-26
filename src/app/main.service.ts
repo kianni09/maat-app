@@ -4,7 +4,7 @@ import { environment } from '../environments/environment.prod';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { LoginForm, RegistrationForm, User, Subscription } from './main.models';
+import { LoginForm, RegistrationForm, User, Subscription, SubscriptionAddForm, SubscriptionAddAnswer } from './main.models';
 
 @Injectable({
   providedIn: 'root',
@@ -26,6 +26,7 @@ export class MainService {
   public loginWindow: boolean = false;
   public registrationWindow: boolean = false;
   public subscriptionWindow: boolean = false;
+  public documentsWindow: boolean = false;
 
   private UserLoad() {
     if (localStorage.getItem('MAATUser')) {
@@ -62,20 +63,40 @@ export class MainService {
     return this.http.post(environment.registration, registrationForm);
   }
 
+  public startLoadSubscriptions: boolean = true;
   public subscriptions: Subscription[] = []
   public subscriptions$: Subject<Subscription[]> = new Subject();
 
   public getSubscriptions$(companyID: string): void {
+    this.startLoadSubscriptions = true;
     this.http
       .get(environment.getSubscriptions + companyID)
       .subscribe((subscriptions: Subscription[]) => {
         console.log(subscriptions);
         this.subscriptions = subscriptions;
-        this.subscriptions$.next(
-          this.subscriptions.map((subscription: Subscription) => {
-            return { ...subscription, open: false };
-          })
-        );
+        this.subscriptionsCategory();
       });
   }
+
+  public subscriptionsSwitcher: boolean = true;
+  public subscriptionsCategory(): void {
+    if (this.subscriptionsSwitcher) {
+      this.subscriptions$.next(this.subscriptions.filter((subscription: Subscription) => {
+        return subscription.users.some((user: User) => {
+          return user.userID === this.user.userID
+        })
+      }));
+    } else {
+      this.subscriptions$.next(this.subscriptions)
+    }
+    setTimeout(() => {
+      this.startLoadSubscriptions = false;
+    }, 500)
+  }
+
+  public addNewSubscription$(data: SubscriptionAddForm): Observable<any> {
+    return this.http.post(environment.addSubscription, data);
+  }
+
+
 }

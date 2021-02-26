@@ -99,3 +99,8 @@ export interface SubscriptionUserForm {
   userID: string,
   name?: string
 }
+
+export interface MonitoringType {
+  name: string,
+  value: string
+}

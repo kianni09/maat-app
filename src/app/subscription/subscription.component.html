@@ -1,1 +1,18 @@
-<p>subscription works!</p>
+<div class="window">
+    <span (click)="closeWindow()" class="material-icons close-icon">close</span>
+    <div class="input-block">
+        <div class="input-label">Тип моніторингу</div>
+        <select class="select-field" [(ngModel)]="selectedType">
+          <option *ngFor="let type of monitoringTypes" [value]="type.value">{{type.name}}</option>
+       </select>
+    </div>
+    <div class="input-block">
+        <div class="input-label">Об'єкт/об'єкти моніторингу</div>
+        <textarea [(ngModel)]="monitoringObjects" class="textarea-field" [placeholder]="mobitoringObjectsDescriptions"></textarea>
+    </div>
+    <div *ngIf="errorMessage" class="error-message">Ліміт використан</div>
+    <div *ngIf="loadBar" class="load-animation"></div>
+    <div (click)="send()" *ngIf="!loadBar" class="login-button">
+        Додати
+    </div>
+</div>
