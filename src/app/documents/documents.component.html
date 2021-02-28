@@ -1,0 +1,106 @@
+<div class="window">
+    <span (click)="closeWindow()" class="material-icons close-icon">close</span>
+    <div *ngIf="dataLoad" class="case-block">
+
+        <div class="category-name">Основна інформація:</div>
+
+        <div class="case-line ">
+            <div class="info-block" style="width: 49%;">
+                <div class="category">Номер справи</div>
+                <div class="info">{{case.number}}</div>
+            </div>
+
+            <div class="info-block" style="width: 49%;">
+                <div class="category">Назва суду</div>
+                <div class="info">{{case.court_name}}</div>
+            </div>
+        </div>
+
+        <div class="case-line ">
+            <div class="info-block" style="width: 49%;">
+                <div class="category">Суддя:</div>
+                <div class="info">{{case.judge}}</div>
+            </div>
+
+            <div class="info-block" style="width: 49%;">
+                <div class="category">Дата початку</div>
+                <div class="info">{{case.date_start}}</div>
+            </div>
+        </div>
+
+        <div class="case-line ">
+            <div class="info-block" style="width: 49%;">
+                <div class="category">Тип справи</div>
+                <div class="info">{{case.type}}</div>
+            </div>
+
+            <div class="info-block" style="width: 49%;">
+                <div class="category">Статус справи</div>
+                <div class="info">{{case.stage_name}}</div>
+            </div>
+        </div>
+
+        <div *ngIf="case.description" class="case-line ">
+            <div class="info-block" style="width: 100%;">
+                <div class="category">Опис справи</div>
+                <div class="info">{{case.description}}</div>
+            </div>
+        </div>
+
+        <div class="category-name">Учасники справи:</div>
+
+        <div *ngIf="case.plaintiffs.length || case.defendants.length" class="case-line ">
+            <div *ngIf="case.plaintiffs.length" class="info-block" style="width: 49%;">
+                <div class="category">Позивач</div>
+                <div *ngFor="let participant of case.plaintiffs" class="info">{{participant.name + " - " + participant.type}}</div>
+            </div>
+
+            <div *ngIf="case.defendants.length" class="info-block" style="width: 49%;">
+                <div class="category">Відповідач</div>
+                <div *ngFor="let participant of case.defendants" class="info">{{participant.name + " - " + participant.type}}</div>
+            </div>
+        </div>
+
+        <div *ngIf="case.third_persons.length" class="case-line">
+            <div class="info-block" style="width: 49%;">
+                <div class="category">Третя сторона</div>
+                <div *ngFor="let participant of case.third_persons" class="info">{{participant.name + " - " + participant.type}}</div>
+            </div>
+        </div>
+
+        <div class="category-name">Документи:</div>
+
+        <div *ngIf="documentsList( case.stages.first, case.stages.appeals, case.stages.cassations ).length" class="documents-block">
+            <div *ngFor="let document of documentsList( case.stages.first, case.stages.appeals, case.stages.cassations )" class="document">
+                <div class="info-block" style="width: 35%;">
+                    <div class="category">Стадія</div>
+                    <div class="info">{{document.stage}}</div>
+                </div>
+
+                <div class="info-block" style="width: 35%;">
+                    <div class="category">Дата публікації</div>
+                    <div class="info">{{document.adjudication_date}}</div>
+                </div>
+
+                <span *ngIf="document.link" (click)="openLink(document.link)" class="material-icons document-icon">description</span>
+
+                <div *ngIf="!document.link" class="document-empty">-</div>
+            </div>
+        </div>
+
+        <div *ngIf="!documentsList( case.stages.first, case.stages.appeals, case.stages.cassations ).length" class="category-name">Документи відсутні</div>
+
+    </div>
+
+    <div *ngIf="!dataLoad" class="animation-back">
+        <div class="spinner">
+            <div class="spinner-item"></div>
+            <div class="spinner-item"></div>
+            <div class="spinner-item"></div>
+            <div class="spinner-item"></div>
+            <div class="spinner-item"></div>
+        </div>
+    </div>
+
+
+</div>

@@ -32,7 +32,8 @@ export interface Participant {
 export interface Document {
   adjudication_date: string,
   link: string,
-  court_name: string
+  court_name: string,
+  stage: string
 }
 
 export interface Stages {
@@ -73,7 +74,8 @@ export interface Subscription {
   subscribeTime: string,
   users: User[],
   notifications: Notification[],
-  open?: boolean
+  open?: boolean,
+  delete: boolean
 }
 
 export interface SubscriptionAddForm {
@@ -95,7 +97,7 @@ export interface SubscriptionDeleteForm {
 
 export interface SubscriptionUserForm {
   companyID: string,
-  subscriptionID: string[],
+  subscriptionID: string,
   userID: string,
   name?: string
 }

@@ -21,4 +21,8 @@ export class AppComponent {
     return this.mainService.subscriptionWindow;
   }
 
+  get documentsWindow () {
+    return this.mainService.documentsWindow;
+  }
+
 }

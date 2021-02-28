@@ -4,16 +4,20 @@
     width: 380px;
     padding: 40px 40px;
     border-radius: $box-radius;
-    background-color: $background-color;
+    background-color: $main-color;
     position: relative;
     .close-icon {
         display: block;
         position: absolute;
         top: 20px;
         right: 20px;
-        font-size: 20px;
-        color: $action-color;
+        font-size: 35px;
+        color: $text-secondary-color;
         cursor: pointer;
+        transition: 0.4s;
+        &:hover {
+            color: $action-color;
+        }
     }
     .input-block {
         @include flex(column, null, null);

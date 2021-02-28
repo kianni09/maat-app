@@ -11,6 +11,7 @@ import { MainComponent } from './main/main.component';
 import { SubscriptionComponent } from './subscription/subscription.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
+import { DocumentsComponent } from './documents/documents.component';
 
 @NgModule({
   declarations: [
@@ -20,7 +21,8 @@ import { RegistrationComponent } from './registration/registration.component';
     MainComponent,
     SubscriptionComponent,
     LoginComponent,
-    RegistrationComponent
+    RegistrationComponent,
+    DocumentsComponent
   ],
   imports: [
     BrowserModule,

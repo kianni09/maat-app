@@ -1,5 +1,11 @@
 import { Component, OnInit } from '@angular/core';
-import { Subscription, User, Notification } from '../main.models';
+import {
+  Subscription,
+  User,
+  Notification,
+  SubscriptionDeleteForm,
+  SubscriptionUserForm,
+} from '../main.models';
 import { MainService } from '../main.service';
 import { Table } from '../table.model';
 
@@ -43,9 +49,9 @@ export class MainComponent implements OnInit {
   }
 
   public checkUsersInside(users: User[]): boolean {
-    return users.some( (user: User) => {
+    return users.some((user: User) => {
       return user.userID === this.user.userID;
-    } )
+    });
   }
 
   get subscriptionsSwitcher(): boolean {
@@ -53,7 +59,7 @@ export class MainComponent implements OnInit {
   }
 
   public switcherAction(action: string): void {
-    this.mainService.subscriptionsSwitcher = action === "self";
+    this.mainService.subscriptionsSwitcher = action === 'self';
     this.mainService.subscriptionsCategory();
     this.scrollTop();
   }
@@ -66,9 +72,61 @@ export class MainComponent implements OnInit {
     this.mainService.subscriptionWindow = true;
   }
 
-  public updateSubscriptions (): void {
+  public updateSubscriptions(): void {
     this.mainService.getSubscriptions$(this.user.companyID);
   }
 
+  public openDocuments(notification: Notification) {
+    this.mainService.notificationsToOpen = {
+      companyID: this.user.companyID,
+      number: notification.number,
+      notificationID: notification._id,
+    };
+    notification.read = true;
+    this.mainService.documentsWindow = true;
+  }
 
+  public deleteSubscription(subscription: Subscription): void {
+    let data: SubscriptionDeleteForm = {
+      subscriptionID: subscription._id,
+      companyID: this.user.companyID,
+    };
+    this.mainService.deleteSubscription(data).subscribe((result) => {
+      subscription.open = false;
+      subscription.delete = true;
+    });
+  }
+
+  public addUserToSubscription(subscription: Subscription): void {
+    let data: SubscriptionUserForm = {
+      subscriptionID: subscription._id,
+      companyID: this.user.companyID,
+      name: this.user.name,
+      userID: this.user.userID,
+    };
+    this.mainService
+      .addUserToSubscription(data)
+      .subscribe((result: boolean) => {
+        let user: User = {
+          name: this.user.name,
+          userID: this.user.userID,
+        };
+        subscription.users.push(user);
+      });
+  }
+
+  public deleteUserFromSubscription(subscription: Subscription): void {
+    let data: SubscriptionUserForm = {
+      subscriptionID: subscription._id,
+      companyID: this.user.companyID,
+      userID: this.user.userID,
+    };
+    this.mainService
+      .deleteUserFromSubscription(data)
+      .subscribe((result: boolean) => {
+        subscription.users = subscription.users.filter((user) => {
+          return user.userID !== this.user.userID;
+        });
+      });
+  }
 }

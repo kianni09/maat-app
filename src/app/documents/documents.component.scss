@@ -1,0 +1,96 @@
+@import "../app.component.scss";
+.window {
+    width: 800px;
+    height: 600px;
+    padding: 40px 40px;
+    border-radius: $box-radius;
+    background-color: $main-color;
+    font-family: $font-family;
+    position: relative;
+    .close-icon {
+        display: block;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 35px;
+        color: $text-secondary-color;
+        transition: 0.4s;
+        cursor: pointer;
+        &:hover {
+            color: $action-color;
+        }
+    }
+    .case-block {
+        @include custom-scrollbar;
+        @include flex(column, null, null);
+        width: 100%;
+        height: 100%;
+        .category-name {
+            font-size: $title-text-size;
+            font-weight: 600;
+            color: $text-main-color;
+            margin-bottom: 20px;
+            width: 100%
+        }
+        .case-line {
+            @include flex(row, space-between, null);
+            width: 100%;
+            margin-bottom: 20px;
+            .info-block {
+                @include flex(column, null, null);
+                flex: none;
+                .category {
+                    font-size: $addiction-text-size;
+                    color: $text-secondary-color
+                }
+                .info {
+                    font-size: $main-text-size;
+                    color: $text-main-color;
+                    margin-top: 10px;
+                    word-wrap: break-word;
+                }
+            }
+        }
+        .documents-block {
+            @include flex(row, space-between, null);
+            flex-wrap: wrap;
+            width: 100%;
+            .document {
+                @include flex(row, space-between, null);
+                width: 330px;
+                margin: 10px;
+                padding: 20px;
+                border-radius: $box-radius;
+                box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
+                .info-block {
+                    @include flex(column, null, null);
+                    flex: none;
+                    .category {
+                        font-size: $addiction-text-size;
+                        color: $text-secondary-color
+                    }
+                    .info {
+                        font-size: $main-text-size;
+                        color: $text-main-color;
+                        margin-top: 10px;
+                        word-wrap: break-word;
+                    }
+                }
+                .document-icon {
+                    font-size: 45px;
+                    color: $text-secondary-color;
+                    transition: 0.4s;
+                    cursor: pointer;
+                    &:hover {
+                        color: $action-color;
+                    }
+                }
+                .document-empty {
+                    @include flex(row, center, center);
+                    width: 45px;
+                    font-size: 40px;
+                }
+            }
+        }
+    }
+}

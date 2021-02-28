@@ -30,7 +30,10 @@
 
         <div *ngIf="!startLoad" class="subscription-block">
             <div *ngFor="let subscription of subscriptions.data" class="subscription-card-block">
-                <div (click)="subscription.open = !subscription.open" class="subscription-card">
+                <div *ngIf="subscription.delete" class="subscription-card">
+                    <div class="delete-info">Підписка видалена!</div>
+                </div>
+                <div *ngIf="!subscription.delete" (click)="subscription.open = !subscription.open" class="subscription-card">
                     <span *ngIf="subscription.notifications.length" class="material-icons notifications-selector-icon" style="width: 5%;">{{subscription.open?"keyboard_arrow_up":"keyboard_arrow_down"}}</span>
                     <div *ngIf="!subscription.notifications.length" style="width: 5%;"></div>
                     <div class="info-block" style="width: 30%;">
@@ -45,6 +48,7 @@
 
                     <div class="info-block" style="width: 25%;">
                         <div class="category">Відповідальні особи</div>
+                        <div *ngIf="!subscription.users.length" class="info">Відсутні</div>
                         <div *ngFor="let user of subscription.users" class="info">{{user.name}}</div>
                     </div>
 
@@ -53,13 +57,13 @@
                         <div class="info">{{getUnreadNotificationsCount(subscription.notifications)}}</div>
                     </div>
                     <div class="icons-block" style="width: 6%;">
-                        <span *ngIf="!checkUsersInside(subscription.users)" class="material-icons action-icon">add_circle_outline</span>
-                        <span *ngIf="checkUsersInside(subscription.users) && subscription.users.length > 1" class="material-icons action-icon">remove_circle_outline</span>
-                        <span *ngIf="checkUsersInside(subscription.users) && subscription.users.length === 1" class="material-icons action-icon">delete</span>
+                        <span (click)="addUserToSubscription(subscription); $event.stopPropagation()" *ngIf="!checkUsersInside(subscription.users)" class="material-icons action-icon">add_circle_outline</span>
+                        <span (click)="deleteUserFromSubscription(subscription); $event.stopPropagation()" *ngIf="checkUsersInside(subscription.users) && subscription.users.length > 1" class="material-icons action-icon">remove_circle_outline</span>
+                        <span (click)="deleteSubscription(subscription); $event.stopPropagation()" *ngIf="checkUsersInside(subscription.users) && subscription.users.length === 1" class="material-icons action-icon">delete</span>
                     </div>
                 </div>
                 <div *ngIf="subscription.open" class="notifications-block">
-                    <div *ngFor="let notification of subscription.notifications" class="notification-card">
+                    <div *ngFor="let notification of subscription.notifications" (click)="openDocuments(notification)" class="notification-card">
                         <div class="info-block">
                             <div class="category">Номер справи</div>
                             <div class="info">{{notification.number}}</div>

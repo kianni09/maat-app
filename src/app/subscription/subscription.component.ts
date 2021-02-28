@@ -45,7 +45,7 @@ export class SubscriptionComponent implements OnInit {
   ]
   public selectedType: string = this.monitoringTypes[0].value;
   public monitoringObjects: string = ""
-  public mobitoringObjectsDescriptions: string = "Введіть об'єкт моніторингу. Можливо внесення декілька об'єктів - кожен з нової строки."
+  public mobitoringObjectsDescriptions: string = "Введіть об'єкт моніторингу: номер справи, ПІБ особи або назву організації (назву організації потрібно вводити без форми власності, наприклад Рога та Копита, а не ТОВ Рога та Копита). \nМожливо внесення декілька об'єктів - кожен з нової строки."
 
   public send(): void {
     if (this.selectedType && this.monitoringObjects) {

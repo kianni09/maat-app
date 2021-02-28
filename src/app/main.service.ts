@@ -4,7 +4,7 @@ import { environment } from '../environments/environment.prod';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { LoginForm, RegistrationForm, User, Subscription, SubscriptionAddForm, SubscriptionAddAnswer } from './main.models';
+import { LoginForm, RegistrationForm, User, Subscription, SubscriptionAddForm, SubscriptionAddAnswer, DocumentsForm, SubscriptionDeleteForm, SubscriptionUserForm } from './main.models';
 
 @Injectable({
   providedIn: 'root',
@@ -96,6 +96,23 @@ export class MainService {
 
   public addNewSubscription$(data: SubscriptionAddForm): Observable<any> {
     return this.http.post(environment.addSubscription, data);
+  }
+
+  public notificationsToOpen: DocumentsForm = undefined;
+  public getDocuments(data: DocumentsForm): Observable<any>{
+    return this.http.post(environment.getDocuments, data);
+  }
+
+  public deleteSubscription(data: SubscriptionDeleteForm): Observable<any> {
+    return this.http.post(environment.deleteSubscription, data);
+  }
+
+  public addUserToSubscription(data: SubscriptionUserForm): Observable<any> {
+    return this.http.post(environment.addSubscriptionUser, data);
+  }
+
+  public deleteUserFromSubscription(data: SubscriptionUserForm): Observable<any> {
+    return this.http.post(environment.deleteSubscriptionUser, data);
   }
 
 
