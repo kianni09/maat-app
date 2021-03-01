@@ -61,7 +61,7 @@ export class MainComponent implements OnInit {
   public switcherAction(action: string): void {
     this.mainService.subscriptionsSwitcher = action === 'self';
     this.mainService.subscriptionsCategory();
-    this.scrollTop();
+    document.querySelector('div.subscription-block') ? this.scrollTop(): undefined;
   }
 
   get startLoad(): boolean {

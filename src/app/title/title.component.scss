@@ -35,3 +35,26 @@
         }
     }
 }
+
+@media only screen and (max-width: 1000px) {
+    .title-root {
+        .title-space {
+            .info-block {
+                @include flex(column, null, center);
+                margin: 20px 0px;
+                &:nth-child(2) {
+                    flex-direction: column-reverse;
+                }
+                .text-block {
+                    width: 100%;
+                    margin-top: 10px;
+                    .title-text {
+                        font-size: 20px;
+                        margin-bottom: 10px;
+                        word-wrap: break-word;
+                    }
+                }
+            }
+        }
+    }
+}

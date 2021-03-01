@@ -28,7 +28,7 @@
 
         </div>
 
-        <div *ngIf="!startLoad" class="subscription-block">
+        <div *ngIf="!startLoad && subscriptions.data.length" class="subscription-block">
             <div *ngFor="let subscription of subscriptions.data" class="subscription-card-block">
                 <div *ngIf="subscription.delete" class="subscription-card">
                     <div class="delete-info">Підписка видалена!</div>
@@ -36,27 +36,27 @@
                 <div *ngIf="!subscription.delete" (click)="subscription.open = !subscription.open" class="subscription-card">
                     <span *ngIf="subscription.notifications.length" class="material-icons notifications-selector-icon" style="width: 5%;">{{subscription.open?"keyboard_arrow_up":"keyboard_arrow_down"}}</span>
                     <div *ngIf="!subscription.notifications.length" style="width: 5%;"></div>
-                    <div class="info-block" style="width: 30%;">
+                    <div class="info-block">
                         <div class="category">Об'єкт моніторингу</div>
                         <div class="info">{{subscription.subscriptionKey}}</div>
                     </div>
 
-                    <div class="info-block" style="width: 15%;">
+                    <div class="info-block">
                         <div class="category">Останнє оновлення</div>
                         <div class="info">{{subscription.notifications.length > 0 ? subscription.notifications[0].date:"Оновлення відсутні"}}</div>
                     </div>
 
-                    <div class="info-block" style="width: 25%;">
+                    <div class="info-block">
                         <div class="category">Відповідальні особи</div>
                         <div *ngIf="!subscription.users.length" class="info">Відсутні</div>
                         <div *ngFor="let user of subscription.users" class="info">{{user.name}}</div>
                     </div>
 
-                    <div class="info-block" style="width: 15%;">
+                    <div class="info-block">
                         <div class="category">Нові повідомлення</div>
                         <div class="info">{{getUnreadNotificationsCount(subscription.notifications)}}</div>
                     </div>
-                    <div class="icons-block" style="width: 6%;">
+                    <div class="icons-block">
                         <span (click)="addUserToSubscription(subscription); $event.stopPropagation()" *ngIf="!checkUsersInside(subscription.users)" class="material-icons action-icon">add_circle_outline</span>
                         <span (click)="deleteUserFromSubscription(subscription); $event.stopPropagation()" *ngIf="checkUsersInside(subscription.users) && subscription.users.length > 1" class="material-icons action-icon">remove_circle_outline</span>
                         <span (click)="deleteSubscription(subscription); $event.stopPropagation()" *ngIf="checkUsersInside(subscription.users) && subscription.users.length === 1" class="material-icons action-icon">delete</span>
@@ -83,12 +83,16 @@
             </div>
         </div>
 
-        <div *ngIf="!startLoad" class="pages-block">
+        <div *ngIf="!startLoad && subscriptions.data.length" class="pages-block">
             <button [disabled]="subscriptions.pageIndex == 0" class="page-button" (click)="subscriptions.updatePageManual(0); scrollTop()">1</button>
             <div class="page-dotes" *ngIf="subscriptions.pageIndex > 2 && subscriptions.totalPages > 5 ">...</div>
             <button class="page-button" [disabled]="subscriptions.pageIndex == (i - 1)" *ngFor="let i of subscriptions.centreButtons" (click)="subscriptions.updatePageManual(i - 1); scrollTop()">{{i}}</button>
             <div class="page-dotes" *ngIf="(subscriptions.pageIndex < (subscriptions.totalPages - 3)) && subscriptions.totalPages > 5 ">...</div>
             <button [disabled]="subscriptions.pageIndex == ( subscriptions.totalPages - 1 )" class="page-button" *ngIf="subscriptions.totalPages > 1" (click)="subscriptions.updatePageManual(subscriptions.totalPages-1); scrollTop()">{{subscriptions.totalPages}}</button>
+        </div>
+
+        <div *ngIf="!startLoad && !subscriptions.data.length" class="animation-back">
+            <div class="void-info">Інформація відсутня. Будь ласка, додайте об'єкти моніторингу!</div>
         </div>
 
         <div *ngIf="startLoad" class="animation-back">
