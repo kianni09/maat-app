@@ -74,6 +74,7 @@ export interface Subscription {
   subscribeTime: string,
   users: User[],
   notifications: Notification[],
+  description: string;
   open?: boolean,
   delete: boolean
 }
@@ -81,7 +82,8 @@ export interface Subscription {
 export interface SubscriptionAddForm {
   companyID: string,
 	targets: string[],
-	type: string,
+  type: string,
+  description: string;
 	user: User
 }
 

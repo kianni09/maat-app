@@ -2,7 +2,7 @@
 .window {
     @include flex(column, null, center);
     width: 380px;
-    padding: 40px 40px;
+    padding: 40px;
     border-radius: $box-radius;
     background-color: $main-color;
     position: relative;
@@ -39,7 +39,7 @@
             @include custom-input;
             @include custom-scrollbar;
             width: calc(100% - 14px);
-            height: 200px;
+            height: 150px;
             font-family: $font-family;
             resize: none;
         }
@@ -55,5 +55,12 @@
     .login-button {
         @include custom-button($text-main-color, $accept-color);
         width: calc(100% - 20px);
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .window {
+        width: calc(80vw - 40px);
+        padding: 40px;
     }
 }
