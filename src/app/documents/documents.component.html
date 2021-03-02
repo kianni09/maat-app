@@ -50,19 +50,19 @@
         <div class="category-name">Учасники справи:</div>
 
         <div *ngIf="case.plaintiffs.length || case.defendants.length" class="case-line ">
-            <div *ngIf="case.plaintiffs.length" class="info-block" style="width: 49%;">
+            <div *ngIf="case.plaintiffs.length" class="info-block">
                 <div class="category">Позивач</div>
                 <div *ngFor="let participant of case.plaintiffs" class="info">{{participant.name + " - " + participant.type}}</div>
             </div>
 
-            <div *ngIf="case.defendants.length" class="info-block" style="width: 49%;">
+            <div *ngIf="case.defendants.length" class="info-block">
                 <div class="category">Відповідач</div>
                 <div *ngFor="let participant of case.defendants" class="info">{{participant.name + " - " + participant.type}}</div>
             </div>
         </div>
 
         <div *ngIf="case.third_persons.length" class="case-line">
-            <div class="info-block" style="width: 49%;">
+            <div class="info-block">
                 <div class="category">Третя сторона</div>
                 <div *ngFor="let participant of case.third_persons" class="info">{{participant.name + " - " + participant.type}}</div>
             </div>

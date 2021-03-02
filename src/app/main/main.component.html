@@ -34,8 +34,11 @@
                     <div class="delete-info">Підписка видалена!</div>
                 </div>
                 <div *ngIf="!subscription.delete" (click)="subscription.open = !subscription.open" class="subscription-card">
-                    <span *ngIf="subscription.notifications.length" class="material-icons notifications-selector-icon" style="width: 5%;">{{subscription.open?"keyboard_arrow_up":"keyboard_arrow_down"}}</span>
-                    <div *ngIf="!subscription.notifications.length" style="width: 5%;"></div>
+                    <div class="icons-block">
+                        <span *ngIf="subscription.notifications.length" class="material-icons notifications-selector-icon">{{subscription.open?"keyboard_arrow_up":"keyboard_arrow_down"}}</span>
+                        <div *ngIf="!subscription.notifications.length"></div>
+                    </div>
+
                     <div class="info-block">
                         <div class="category">Об'єкт моніторингу</div>
                         <div class="info">{{subscription.subscriptionKey}}</div>

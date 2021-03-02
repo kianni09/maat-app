@@ -106,7 +106,7 @@
                 @include flex(column, null, null);
                 width: 100%;
                 .subscription-card {
-                    @include flex(row, space-between, center);
+                    @include flex(row, space-between, null);
                     background-color: $main-color;
                     border-radius: $box-radius;
                     margin: 10px 0px;
@@ -145,10 +145,6 @@
                             width: 10%;
                         }
                     }
-                    .notifications-selector-icon {
-                        font-size: 40px;
-                        transition: 0.3s;
-                    }
                     .icons-block {
                         @include flex(row, center, center);
                         width: 6%;
@@ -161,14 +157,18 @@
                                 color: $action-color;
                             }
                         }
+                        .notifications-selector-icon {
+                            font-size: 40px;
+                            transition: 0.3s;
+                        }
                     }
                     &:hover {
-                        .notifications-selector-icon {
-                            color: $action-color;
-                        }
                         .icons-block {
                             .action-icon {
                                 display: block
+                            }
+                            .notifications-selector-icon {
+                                color: $action-color;
                             }
                         }
                     }
@@ -284,6 +284,12 @@
                                 width: 49%;
                             }
                             &:nth-child(4) {
+                                width: 49%;
+                            }
+                            &:nth-child(5) {
+                                width: 49%;
+                            }
+                            &:nth-child(6) {
                                 width: 49%;
                             }
                         }
