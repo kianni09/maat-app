@@ -24,5 +24,8 @@ export class AppComponent {
   get documentsWindow () {
     return this.mainService.documentsWindow;
   }
+  get reportWindow () {
+    return this.mainService.reportWindow;
+  }
 
 }

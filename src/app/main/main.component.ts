@@ -26,6 +26,13 @@ export class MainComponent implements OnInit {
 
   ngOnInit(): void {}
 
+  get isMobile(): boolean {
+    return window.innerWidth <= 1000;
+  }
+
+  public searchShow: boolean = false;
+  public buttonsShow: boolean = false;
+
   get user(): User {
     return this.mainService.user;
   }
@@ -74,6 +81,10 @@ export class MainComponent implements OnInit {
 
   public updateSubscriptions(): void {
     this.mainService.getSubscriptions$(this.user.companyID);
+  }
+
+  public createReport(): void {
+    this.mainService.reportWindow = true;
   }
 
   public openDocuments(notification: Notification) {

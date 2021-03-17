@@ -43,7 +43,7 @@
                 }
             }
             .head-switcher {
-                width: 300px;
+                width: 200px;
                 height: 40px;
                 border: 1px solid $action-color;
                 border-radius: $box-radius;
@@ -52,7 +52,7 @@
                 .switcher-trigger {
                     position: absolute;
                     z-index: 5;
-                    width: 150px;
+                    width: 100px;
                     height: 40px;
                     border: 1px solid $action-color;
                     border-radius: $box-radius;
@@ -62,17 +62,17 @@
                 }
                 .switcher-labels {
                     @include flex(row, space-between, center);
-                    width: 300px;
+                    width: 200px;
                     height: 40px;
                     position: absolute;
                     z-index: 10;
                     .switcher-label {
                         @include flex(row, center, center);
-                        width: 150px;
+                        width: 100px;
                         height: 40px;
                         color: $main-color;
                         font-family: $font-family;
-                        font-size: 25px;
+                        font-size: 20px;
                         cursor: pointer;
                         user-select: none;
                         transition: 0.4s
@@ -87,13 +87,34 @@
                 }
                 .update-button {
                     @include custom-button($text-main-color, $selection-color);
+                    margin-right: 20px;
+                }
+                .report-button {
+                    @include custom-button($text-main-color, $action-color);
                 }
                 .add-button,
-                .update-button {
+                .update-button,
+                .report-button,
+                .search-show-button,
+                .buttons-show-button {
                     &:hover {
                         color: $main-color;
                     }
                 }
+            }
+        }
+        .search-show-button {
+            @include custom-button($text-main-color, $selection-color);
+            padding: 5px !important;
+        }
+        .buttons-show-button {
+            @include custom-button($text-main-color, $accept-color);
+            padding: 5px !important;
+        }
+        .search-show-button,
+        .buttons-show-button {
+            &:hover {
+                color: $main-color;
             }
         }
         .subscription-block {
@@ -258,12 +279,10 @@
     .main-root {
         .main-space {
             .head-block {
-                width: 100%;
-                padding: 20px 0px;
-                justify-content: center;
-                .search-block,
-                .buttons-block {
-                    display: none;
+                width: calc(100% - 40px);
+                padding: 20px 20px;
+                .search-block {
+                    width: 250px;
                 }
             }
             .subscription-block {

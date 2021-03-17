@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { SubscriptionAddForm, SubscriptionAddAnswer, MonitoringType, User } from '../main.models';
+import { SubscriptionAddForm, SubscriptionAddAnswer, SelectionItem, User } from '../main.models';
 import { MainService } from '../main.service';
 
 @Component({
@@ -21,7 +21,7 @@ export class SubscriptionComponent implements OnInit {
   public loadBar: boolean = false;
   public errorMessage: boolean = false;
 
-  public monitoringTypes: MonitoringType[] = [
+  public monitoringTypes: SelectionItem[] = [
     {
       name: "Моніторинг за учасником судової справи",
       value: "court-by-involved"

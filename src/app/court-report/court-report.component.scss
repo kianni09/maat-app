@@ -1,0 +1,66 @@
+@import "../app.component.scss";
+.window {
+    @include flex(column, null, center);
+    width: 380px;
+    padding: 40px;
+    border-radius: $box-radius;
+    background-color: $main-color;
+    position: relative;
+    .close-icon {
+        display: block;
+        position: absolute;
+        top: 20px;
+        right: 20px;
+        font-size: 35px;
+        color: $text-secondary-color;
+        cursor: pointer;
+        transition: 0.4s;
+        &:hover {
+            color: $action-color;
+        }
+    }
+    .input-block {
+        @include flex(column, null, null);
+        width: 100%;
+        margin-bottom: 20px;
+        .input-label {
+            width: 100%;
+            padding-bottom: 10px;
+            font-family: $font-family;
+            font-size: $title-text-size;
+            color: $selection-color-second;
+        }
+        .select-field {
+            @include custom-input;
+            width: 100%;
+            font-family: $font-family;
+        }
+        .textarea-field {
+            @include custom-input;
+            @include custom-scrollbar;
+            width: calc(100% - 14px);
+            height: 150px;
+            font-family: $font-family;
+            resize: none;
+        }
+    }
+    .error-message {
+        width: 100%;
+        word-wrap: break-word;
+        color: $deccept-color;
+        font-size: $main-text-size;
+        margin-bottom: 20px;
+        font-family: $font-family;
+    }
+    .login-button {
+        @include custom-button($text-main-color, $accept-color);
+        width: calc(100% - 20px);
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .window {
+        width: calc(80vw - 40px);
+        padding: 40px;
+    }
+}

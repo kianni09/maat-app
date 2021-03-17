@@ -8,11 +8,12 @@
         </div>
     </div>
 
-    <div *ngIf="loginWindow || registrationWindow || subscriptionWindow || documentsWindow" class="windows-background">
+    <div *ngIf="loginWindow || registrationWindow || subscriptionWindow || documentsWindow || reportWindow" class="windows-background">
         <app-login *ngIf="loginWindow"></app-login>
         <app-registration *ngIf="registrationWindow"></app-registration>
         <app-subscription *ngIf="subscriptionWindow"></app-subscription>
         <app-documents *ngIf="documentsWindow"></app-documents>
+        <app-court-report *ngIf="reportWindow"></app-court-report>
     </div>
 
 

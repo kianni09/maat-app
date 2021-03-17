@@ -4,7 +4,7 @@ import { environment } from '../environments/environment.prod';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { LoginForm, RegistrationForm, User, Subscription, SubscriptionAddForm, SubscriptionAddAnswer, DocumentsForm, SubscriptionDeleteForm, SubscriptionUserForm } from './main.models';
+import { LoginForm, RegistrationForm, User, Subscription, SubscriptionAddForm, SubscriptionAddAnswer, DocumentsForm, SubscriptionDeleteForm, SubscriptionUserForm, MonitoringReportForm } from './main.models';
 
 @Injectable({
   providedIn: 'root',
@@ -27,6 +27,7 @@ export class MainService {
   public registrationWindow: boolean = false;
   public subscriptionWindow: boolean = false;
   public documentsWindow: boolean = false;
+  public reportWindow: boolean = false;
 
   private UserLoad() {
     if (localStorage.getItem('MAATUser')) {
@@ -113,6 +114,10 @@ export class MainService {
 
   public deleteUserFromSubscription(data: SubscriptionUserForm): Observable<any> {
     return this.http.post(environment.deleteSubscriptionUser, data);
+  }
+
+  public downloadCourtReport(data: MonitoringReportForm ): Observable<any> {
+    return this.http.post(environment.createMonitoringCourtReport, data);
   }
 
 

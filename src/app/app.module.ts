@@ -12,6 +12,8 @@ import { SubscriptionComponent } from './subscription/subscription.component';
 import { LoginComponent } from './login/login.component';
 import { RegistrationComponent } from './registration/registration.component';
 import { DocumentsComponent } from './documents/documents.component';
+import { CourtReportComponent } from './court-report/court-report.component';
+import { CourtSearchComponent } from './court-search/court-search.component';
 
 @NgModule({
   declarations: [
@@ -22,7 +24,9 @@ import { DocumentsComponent } from './documents/documents.component';
     SubscriptionComponent,
     LoginComponent,
     RegistrationComponent,
-    DocumentsComponent
+    DocumentsComponent,
+    CourtReportComponent,
+    CourtSearchComponent
   ],
   imports: [
     BrowserModule,

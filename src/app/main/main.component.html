@@ -1,27 +1,41 @@
 <div class="main-root">
     <div class="main-space" *ngIf="subscriptions">
         <div class="head-block">
-            <div class="search-block">
+            <div *ngIf="!isMobile || searchShow" class="search-block">
                 <input class="input-field" [(ngModel)]="subscriptions.searchValue" (ngModelChange)="subscriptions.OnSearchInit.next($event)" placeholder="Пошук">
                 <span *ngIf="subscriptions.searchValue" (click)="clearSearch()" class="material-icons clear-search-icon">close</span>
             </div>
 
-            <div class="head-switcher">
-                <div class="switcher-trigger" [ngStyle]="{'left': subscriptionsSwitcher? '-1px':'149px'}"></div>
+            <div *ngIf="isMobile  && !buttonsShow" (click)="searchShow = !searchShow" class="search-show-button">
+                <span *ngIf="!searchShow" class="material-icons">search</span>
+                <span *ngIf="searchShow" class="material-icons">keyboard_arrow_left</span>
+            </div>
+
+            <div *ngIf="!buttonsShow && !searchShow" class="head-switcher">
+                <div class="switcher-trigger" [ngStyle]="{'left': subscriptionsSwitcher? '-1px':'99px'}"></div>
                 <div class="switcher-labels">
                     <div (click)="switcherAction('self')" class="switcher-label" [ngStyle]="{'color': subscriptionsSwitcher? '#ffffff':'#161616'}">Власні</div>
                     <div (click)="switcherAction('all')" class="switcher-label" [ngStyle]="{'color': !subscriptionsSwitcher? '#ffffff':'#161616'}">Всі</div>
                 </div>
             </div>
 
-            <div class="buttons-block">
+            <div *ngIf="isMobile && !searchShow" (click)="buttonsShow = !buttonsShow" class="buttons-show-button">
+                <span *ngIf="!buttonsShow" class="material-icons">widgets</span>
+                <span *ngIf="buttonsShow" class="material-icons">keyboard_arrow_right</span>
+            </div>
+
+            <div *ngIf="!isMobile || buttonsShow" class="buttons-block">
                 <div (click)="addMonitoringObject()" class="add-button">
-                    <span class="material-icons" style="margin-right: 5px;">add</span>
-                    <span>Додати</span>
+                    <span class="material-icons">add</span>
+                    <span *ngIf="!isMobile" style="margin-left: 5px;">Додати</span>
                 </div>
                 <div (click)="updateSubscriptions()" class="update-button">
-                    <span class="material-icons" style="margin-right: 5px;">update</span>
-                    <span>Оновити</span>
+                    <span class="material-icons">update</span>
+                    <span *ngIf="!isMobile" style="margin-left: 5px;">Оновити</span>
+                </div>
+                <div (click)="createReport()" class="report-button">
+                    <span class="material-icons">wysiwyg</span>
+                    <span *ngIf="!isMobile" style="margin-left: 5px;">Звіт</span>
                 </div>
             </div>
 

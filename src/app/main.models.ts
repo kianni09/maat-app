@@ -104,7 +104,16 @@ export interface SubscriptionUserForm {
   name?: string
 }
 
-export interface MonitoringType {
+export interface SelectionItem {
   name: string,
   value: string
+}
+
+export interface MonitoringReportForm {
+  companyID: string,
+  date: string
+}
+
+export interface ReportFileName {
+  file: string
 }
