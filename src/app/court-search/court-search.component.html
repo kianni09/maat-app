@@ -1,1 +1,85 @@
-<p>court-search works!</p>
+<div class="main-root">
+    <div class="main-space">
+        <div class="head-block">
+            <div class="search-block">
+                <input class="input-field" [(ngModel)]="searchValue" placeholder="Номер справи, ПІБ або назва організації">
+                <span *ngIf="searchValue" (click)="clearSearch()" class="material-icons clear-search-icon">close</span>
+                <div (click)="search()" class="search-button">
+                    <span class="material-icons">search</span>
+                    <span class="button-label">Пошук</span>
+                </div>
+            </div>
+
+        </div>
+
+        <div *ngIf="!onLoad && resultSearch.length" class="subscription-block">
+            <div *ngFor="let case of resultSearch" class="subscription-card-block">
+
+                <div (click)="openDocuments(case.number)" class="subscription-card">
+
+                    <div class="info-block">
+                        <div class="category">Назва суду</div>
+                        <div class="info">{{case.court_name}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Номер справи</div>
+                        <div class="info">{{case.number}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Стадія</div>
+                        <div class="info">{{case.stage_name}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Дата</div>
+                        <div class="info">{{case.date_stage}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Предмет позову</div>
+                        <div class="info">{{case.description}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Позивач</div>
+                        <div *ngIf="!case.plaintiffs.length" class="info">Відсутній</div>
+                        <div *ngFor="let user of case.plaintiffs" class="info">{{user.name + " - " + user.type}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Відповідач</div>
+                        <div *ngIf="!case.defendants.length" class="info">Відсутній</div>
+                        <div *ngFor="let user of case.defendants" class="info">{{user.name + " - " + user.type}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Треті особи</div>
+                        <div *ngIf="!case.third_persons.length" class="info">Відсутні</div>
+                        <div *ngFor="let user of case.third_persons" class="info">{{user.name + " - " + user.type}}</div>
+                    </div>
+
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div *ngIf="!onLoad && !resultSearch.length" class="animation-back">
+            <div class="void-info">Інформація відсутня</div>
+        </div>
+
+        <div *ngIf="onLoad" class="animation-back">
+            <div class="spinner">
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+            </div>
+        </div>
+
+    </div>
+</div>

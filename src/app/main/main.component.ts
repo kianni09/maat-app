@@ -10,12 +10,13 @@ import { MainService } from '../main.service';
 import { Table } from '../table.model';
 
 @Component({
-  selector: 'app-main',
+  selector: 'app-court-monitoring',
   templateUrl: './main.component.html',
   styleUrls: ['./main.component.scss'],
 })
-export class MainComponent implements OnInit {
+export class CourtMonitoringComponent implements OnInit {
   constructor(private mainService: MainService) {
+    if (this.user) this.mainService.getSubscriptions$(this.user.companyID);
     this.mainService.subscriptions$.subscribe(
       (subscriptions: Subscription[]) => {
         this.subscriptions = new Table(subscriptions);

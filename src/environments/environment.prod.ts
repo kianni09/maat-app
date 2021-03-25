@@ -16,7 +16,13 @@ export const environment = {
   addSubscriptionUser: link + "subscriptions/watch",
   deleteSubscriptionUser: link + "subscriptions/unwatch/",
 
-  searchCourt: link + "search/court?value=",
+  searchCourtCasesStatus: link + "search/court?value=",
   createMonitoringCourtReport: link + "monitoring/court/report/",
-  downloadReport: link + "monitoring/report/download/"
+  downloadReport: link + "monitoring/report/download/",
+
+  debtSearch: link + "search/debt",
+  getVP: link + "search/debt/vp?number=",
+
+  searchCourtCases: link + "search/court-cases?",
+
 };

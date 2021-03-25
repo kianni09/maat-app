@@ -1,9 +1,19 @@
 <div class="header-root">
-    <div class="header-main" [ngStyle]="{'width': user?'calc(100% - 80px)':'80%'}">
-        <div class="logo-block">
+    <div class="header-main">
+        <div *ngIf="!user" class="logo-block">
             <img width="45" height="45" src="/assets/img/logo-header.png" alt="Logo">
             <div class="header-name">MAAT</div>
         </div>
+
+        <div *ngIf="user" (click)="menuAction(); $event.stopPropagation();" class="menu-block">
+            <div [ngClass]="{'menu-icon': !menuStatus, 'close-icon': menuStatus}">
+                <div class="line"></div>
+                <div class="line"></div>
+                <div class="line"></div>
+            </div>
+            <div class="main-name">{{!menuStatus ? menuHeaders[path[1]][path[2]] : 'Меню'}}</div>
+        </div>
+
         <div class="user-block">
             <div *ngIf="!user" class="user-labels">
                 <div (click)="loginWindow()" class="login-button">Вхід</div>

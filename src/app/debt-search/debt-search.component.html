@@ -1,0 +1,175 @@
+<div class="main-root">
+    <div class="main-space">
+        <div class="head-block">
+            <div class="label-block">
+                <div class="head-switcher">
+                    <div class="switcher-trigger" [ngStyle]="{'left': categorySwitcher? '-1px':'99px'}"></div>
+                    <div class="switcher-labels">
+                        <div (click)="swipeSearchCategories(true)" class="switcher-label" [ngStyle]="{'color': categorySwitcher? '#ffffff':'#161616'}">
+                            <span class="material-icons label-icon">person</span>
+                        </div>
+                        <div (click)="swipeSearchCategories(false)" class="switcher-label" [ngStyle]="{'color': !categorySwitcher? '#ffffff':'#161616'}">
+                            <span class="material-icons label-icon">corporate_fare</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div (click)="swipeSearchFields()" class="swipe-button">
+                    <span class="material-icons">{{showSearchFields?'expand_less':'expand_more'}}</span>
+                    <span class="button-label">{{showSearchFields?'Згорнути':'Розгорнути'}}</span>
+                </div>
+            </div>
+
+            <div *ngIf="showSearchFields" class="search-block">
+
+                <div *ngIf="categorySwitcher" class="inputs-block">
+                    <div class="input-block">
+                        <div class="input-label">Прізвище</div>
+                        <input [(ngModel)]="phizSearchForm.LastName" class="input-field" type="text" placeholder="Прізвище" autocomplete="new-password">
+                    </div>
+
+                    <div class="input-block">
+                        <div class="input-label">Ім’я</div>
+                        <input [(ngModel)]="phizSearchForm.FirstName" class="input-field" type="text" placeholder="Ім’я" autocomplete="new-password">
+                    </div>
+
+                    <div class="input-block">
+                        <div class="input-label">По батькові</div>
+                        <input [(ngModel)]="phizSearchForm.MiddleName" class="input-field" type="text" placeholder="По батькові" autocomplete="new-password">
+                    </div>
+
+                    <div class="input-block">
+                        <div class="input-label">Дата народження</div>
+                        <input [(ngModel)]="phizSearchForm.BirthDateV" class="input-field" type="text" placeholder="ДД.ММ.РРРР" autocomplete="new-password">
+                    </div>
+
+                    <div class="input-block">
+                        <div class="input-label">ІПН</div>
+                        <input [(ngModel)]="phizSearchForm.IdentCode" class="input-field" type="text" placeholder="ІПН" autocomplete="new-password">
+                    </div>
+                </div>
+
+                <div *ngIf="!categorySwitcher" class="inputs-block">
+                    <div class="input-block">
+                        <div class="input-label">Назва організації</div>
+                        <input [(ngModel)]="uoSearchForm.FirmName" class="input-field" type="text" placeholder="Назва організації" autocomplete="new-password">
+                    </div>
+
+                    <div class="input-block">
+                        <div class="input-label">ЄДРПОУ</div>
+                        <input [(ngModel)]="uoSearchForm.FirmEdrpou" class="input-field" type="text" placeholder="ЄДРПОУ" autocomplete="new-password">
+                    </div>
+                </div>
+
+                <div class="buttons-block">
+                    <div (click)="search()" class="search-button">
+                        <span class="material-icons">search</span>
+                        <span class="button-label">Пошук</span>
+                    </div>
+
+                    <div (click)="clear()" class="clear-button">
+                        <span class="material-icons">clear</span>
+                        <span class="button-label">Очистити</span>
+                    </div>
+                </div>
+
+
+            </div>
+
+        </div>
+
+        <div *ngIf="!onLoad && resultSearch.length" class="subscription-block">
+            <div *ngFor="let debt of resultSearch" class="subscription-card-block">
+
+                <div class="subscription-card">
+
+                    <div class="info-block">
+                        <div class="category">{{debt.code?"Назва":"ПІБ"}}</div>
+                        <div class="info">{{debt.code?debt.name + " (" + debt.code + ")": debt.lastName + " " + debt.firstName + " " + debt.middleName + " (" + (debt.birthDate | date: "dd.MM.yyyy") + ")"}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Документ виданий</div>
+                        <div class="info">{{debt.publisher}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Зв'язок з виконавцем</div>
+                        <div class="info">{{debt.departmentName}}</div>
+                        <div class="info">{{debt.departmentPhone}}</div>
+                        <div class="info">{{debt.executor}}</div>
+                        <div class="info">{{debt.executorPhone}}</div>
+                        <div class="info">{{debt.executorEmail}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Категорія стягнення</div>
+                        <div class="info">{{debt.deductionType}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Номер виконавчого провадження</div>
+                        <div (click)="getVPinfo(debt)" class="vp">
+                            {{debt.vpNum}}
+                            <span class="material-icons show-icon">{{debt.vpInfo?"keyboard_arrow_up":"keyboard_arrow_down"}}</span>
+                        </div>
+                    </div>
+
+                </div>
+
+                <div *ngIf="debt.vpInfo" class="notifications-block">
+                    <div class="notification-card">
+                        <div class="info-block">
+                            <div class="category">№ АСВП</div>
+                            <div class="info">{{debt.vpInfo.orderNum}}</div>
+                            <div class="category" style="margin-top: 10px;">Орган ДВС / приватний виконавець</div>
+                            <div class="info">{{debt.vpInfo.depStr}}</div>
+                        </div>
+
+                        <div class="info-block">
+                            <div class="category">Стягувач</div>
+                            <div *ngFor="let item of debt.vpInfo.creditors" class="info">
+                                <span *ngIf="item.personSubType !== 'Держава'">
+                                {{item.edrpou?item.name + " (" + item.edrpou + ")" : item.lastName + " " + item.firstName + " " + item.middleName + " (" + (item.birthDate | date: "dd.MM.yyyy") + ")"}}
+                              </span>
+                                <span *ngIf="item.personSubType === 'Держава'">{{item.name}}</span>
+                            </div>
+                        </div>
+
+                        <div class="info-block">
+                            <div class="category">Боржник</div>
+                            <div *ngFor="let item of debt.vpInfo.debtors" class="info">
+                                {{item.edrpou?item.name + " (" + item.edrpou + ")" : item.lastName + " " + item.firstName + " " + item.middleName + " (" + (item.birthDate | date: "dd.MM.yyyy") + ")"}}
+                            </div>
+                        </div>
+
+                        <div class="info-block">
+                            <div class="category">Дата відкриття</div>
+                            <div class="info">{{debt.vpInfo.beginDate | date: "dd.MM.yyyy"}}</div>
+                            <div class="category" style="margin-top: 10px;">Статус</div>
+                            <div class="info">{{debt.vpInfo.mi_wfStateWithError}}</div>
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+        </div>
+
+
+
+        <div *ngIf="!onLoad && !resultSearch.length" class="animation-back">
+            <div class="void-info">Інформація відсутня</div>
+        </div>
+
+        <div *ngIf="onLoad" class="animation-back">
+            <div class="spinner">
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+            </div>
+        </div>
+
+    </div>
+</div>

@@ -1,10 +1,17 @@
 <div class="window">
     <span (click)="closeWindow()" class="material-icons close-icon">close</span>
+    <div class="title-label">Оберіть період</div>
     <div class="input-block">
-        <div class="input-label">Оберіть дату</div>
-        <select class="select-field" [(ngModel)]="selectedDate">
-        <option *ngFor="let type of dates" [value]="type.value">{{type.name}}</option>
-     </select>
+        <div class="input-label">З</div>
+        <select class="select-field" [(ngModel)]="selectedDateFrom">
+          <option *ngFor="let type of dates" [value]="type.value">{{type.name}}</option>
+        </select>
+    </div>
+    <div class="input-block">
+        <div class="input-label">По</div>
+        <select class="select-field" [(ngModel)]="selectedDateTo">
+            <option *ngFor="let type of datesTo" [value]="type.value">{{type.name}}</option>
+        </select>
     </div>
     <div *ngIf="loadBar" class="load-animation"></div>
     <div (click)="send()" *ngIf="!loadBar" class="login-button">

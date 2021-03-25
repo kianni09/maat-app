@@ -1,6 +1,8 @@
 import { Component, OnInit } from '@angular/core';
 import { User, Subscription } from '../main.models';
 import { MainService } from '../main.service';
+import { Location } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -9,28 +11,61 @@ import { MainService } from '../main.service';
 })
 export class HeaderComponent implements OnInit {
 
-  constructor(private mainService: MainService) { }
+  constructor(private mainService: MainService, private location: Location, private router: Router) { }
 
   ngOnInit(): void {
   }
 
-  public loginWindow (): void {
+  public loginWindow(): void {
     this.mainService.loginWindow = true;
   }
 
-  public registrationWindow (): void {
+  public registrationWindow(): void {
     this.mainService.registrationWindow = true;
   }
 
-  get user (): User {
+  get user(): User {
     return this.mainService.user;
   }
 
-  get subscriptionsCount (): number {
-    return this.mainService.subscriptions.filter( (subscription: Subscription) => {return !subscription.delete} ).length;
+  get subscriptionsCount(): number {
+    return this.mainService.subscriptions.filter((subscription: Subscription) => { return !subscription.delete }).length;
   }
 
-  public exit () {
+  public menuHeaders = {
+    start: {
+      title: "MAAT - Про сервіс"
+    },
+    "court": {
+      search: "Реєстр судових рішень - Пошук"
+    },
+    "court-status": {
+      search: "Стан розгляду судових справ - Пошук",
+      monitoring: "Стан розгляду судових справ - Моніторинг"
+    },
+    "debt": {
+      search: "Реєстр боржників - Пошук",
+      monitoring: "Реєстр боржників - Моніторинг"
+    }
+  }
+
+  get path(): string[] {
+    return this.location.path().split('/')
+  }
+
+  get menuStatus(): boolean {
+    return this.mainService.menuStatus;
+  }
+
+  public menuAction(): void {
+    this.mainService.menuStatus = !this.mainService.menuStatus;
+    console.log(this.path)
+
+  }
+
+
+
+  public exit() {
     localStorage.removeItem('MAATUser');
     this.mainService.user = undefined;
     this.mainService.navigate('title');

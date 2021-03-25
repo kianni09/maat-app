@@ -45,15 +45,16 @@ export interface Stages {
 export interface Case {
   number: string,
   court_name: string,
-  judge: string,
-  date_start: string,
-  type: string,
+  judge?: string,
+  date_start?: string,
+  date_stage?: string,
+  type?: string,
   stage_name: string,
   description: string,
   plaintiffs: Participant[],
   defendants: Participant[],
   third_persons: Participant[],
-  stages: Stages
+  stages?: Stages
 }
 
 export interface Notification {
@@ -81,10 +82,10 @@ export interface Subscription {
 
 export interface SubscriptionAddForm {
   companyID: string,
-	targets: string[],
+  targets: string[],
   type: string,
   description: string;
-	user: User
+  user: User
 }
 
 export interface SubscriptionAddAnswer {
@@ -94,7 +95,7 @@ export interface SubscriptionAddAnswer {
 
 export interface SubscriptionDeleteForm {
   companyID: string,
-	subscriptionID: string
+  subscriptionID: string
 }
 
 export interface SubscriptionUserForm {
@@ -111,9 +112,98 @@ export interface SelectionItem {
 
 export interface MonitoringReportForm {
   companyID: string,
-  date: string
+  dateFrom: string,
+  dateTo: string
 }
 
 export interface ReportFileName {
   file: string
+}
+
+export interface DebtSearchFormItem {
+  FirmEdrpou?: string,
+  FirmName?: string,
+  LastName?: string,
+  FirstName?: string,
+  MiddleName?: string,
+  BirthDate?: string,
+  BirthDateV?: string,
+  IdentCode?: string,
+  categoryCode?: string
+
+}
+
+export interface DebtSearchForm {
+  searchType: string,
+  paging: string,
+  filter: DebtSearchFormItem,
+  reCaptchaToken: string
+}
+
+export interface DebtSearchAnswer {
+  isSuccess: boolean,
+  results: DebtItem[]
+}
+
+export interface VPside {
+  debtorOfVdID?: number,
+  creditorOfVdID?: number,
+  lastName?: string,
+  firstName?: string,
+  middleName?: string,
+  birthDate?: string,
+  name?: string,
+  edrpou?: string,
+  personSubType: string
+}
+
+export interface VPinfo {
+  vdID: number,
+  orderNum: string,
+  mi_wfStateWithError: string,
+  depID: number,
+  depStr: string,
+  beginDate: string,
+  debtors: VPside[],
+  creditors: VPside[]
+}
+
+export interface DebtItem {
+  ID: number,
+  rootID: number,
+  lastName?: string,
+  firstName?: string,
+  middleName?: string,
+  birthDate?: string,
+  name?: string,
+  code?: string,
+  publisher: string,
+  departmentCode: string,
+  departmentName: string,
+  departmentPhone: string,
+  executor: string,
+  executorPhone: string,
+  executorEmail: string,
+  deductionType: string,
+  vpNum: string,
+  vpInfo?: VPinfo
+}
+
+export interface CaseItem {
+  "cause_number": string,
+  "adjudication_date": string,
+  "judgment_name": string,
+  "justice_name": string,
+  "stage": string,
+  "court_name": string,
+  "judge": string,
+  "link": string
+}
+
+export interface CaseSearchResult {
+  page: number,
+  totalPages: number,
+  totalCases: number,
+  query: string,
+  cases: CaseItem[]
 }

@@ -4,7 +4,7 @@ import { environment } from '../environments/environment.prod';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { LoginForm, RegistrationForm, User, Subscription, SubscriptionAddForm, SubscriptionAddAnswer, DocumentsForm, SubscriptionDeleteForm, SubscriptionUserForm, MonitoringReportForm } from './main.models';
+import { LoginForm, RegistrationForm, User, Subscription, SubscriptionAddForm, SubscriptionAddAnswer, DocumentsForm, SubscriptionDeleteForm, SubscriptionUserForm, MonitoringReportForm, DebtSearchForm } from './main.models';
 
 @Injectable({
   providedIn: 'root',
@@ -22,6 +22,8 @@ export class MainService {
     this.router.navigate([path]);
   }
 
+  public menuStatus: boolean = false;
+
   public user: User;
   public loginWindow: boolean = false;
   public registrationWindow: boolean = false;
@@ -36,11 +38,11 @@ export class MainService {
           console.log(user);
           this.user = user;
           this.getSubscriptions$(user.companyID);
-          this.router.navigate(['main']);
+          //this.router.navigate(['start/title']);
         }
       );
     } else {
-      this.router.navigate(['title']);
+      this.router.navigate(['start/title']);
     }
   }
 
@@ -100,7 +102,7 @@ export class MainService {
   }
 
   public notificationsToOpen: DocumentsForm = undefined;
-  public getDocuments(data: DocumentsForm): Observable<any>{
+  public getDocuments(data: DocumentsForm): Observable<any> {
     return this.http.post(environment.getDocuments, data);
   }
 
@@ -116,9 +118,26 @@ export class MainService {
     return this.http.post(environment.deleteSubscriptionUser, data);
   }
 
-  public downloadCourtReport(data: MonitoringReportForm ): Observable<any> {
+  public downloadCourtReport(data: MonitoringReportForm): Observable<any> {
     return this.http.post(environment.createMonitoringCourtReport, data);
   }
 
+  public searchCourtCasesStatus$(data: string): Observable<any> {
+    return this.http.get(environment.searchCourtCasesStatus + data)
+  }
+
+  public searchDebt$(data: DebtSearchForm): Observable<any> {
+    return this.http.post(environment.debtSearch, data);
+  }
+
+  public getVPinfo$(data: string): Observable<any> {
+    return this.http.get(environment.getVP + data)
+  }
+
+  public searchCourtCases$(query: string, page: number): Observable<any> {
+    let q = "query=" + query;
+    let p = "&page=" + page
+    return this.http.get(environment.searchCourtCases + q + p);
+  }
 
 }

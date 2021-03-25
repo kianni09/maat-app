@@ -47,8 +47,8 @@
                 <div *ngIf="subscription.delete" class="subscription-card">
                     <div class="delete-info">Підписка видалена!</div>
                 </div>
-                <div *ngIf="!subscription.delete" (click)="subscription.open = !subscription.open" class="subscription-card">
-                    <div class="icons-block">
+                <div *ngIf="!subscription.delete" class="subscription-card">
+                    <div (click)="subscription.open = !subscription.open" class="icons-block">
                         <span *ngIf="subscription.notifications.length" class="material-icons notifications-selector-icon">{{subscription.open?"keyboard_arrow_up":"keyboard_arrow_down"}}</span>
                         <div *ngIf="!subscription.notifications.length"></div>
                     </div>

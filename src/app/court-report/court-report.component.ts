@@ -2,6 +2,8 @@ import { Component, OnInit } from '@angular/core';
 import { MonitoringReportForm, SelectionItem, Subscription, User, Notification, ReportFileName } from '../main.models';
 import { MainService } from '../main.service';
 import { environment } from '../../environments/environment.prod';
+import * as moment from 'moment';
+
 
 @Component({
   selector: 'app-court-report',
@@ -27,7 +29,7 @@ export class CourtReportComponent implements OnInit {
       }
     }).map((date: string) => {
       return {
-        name: date,
+        name: moment(date).format("DD.MM.yyyy"),
         value: date
       }
     });
@@ -40,17 +42,24 @@ export class CourtReportComponent implements OnInit {
     return this.mainService.user;
   }
 
+  public selectedDateFrom: string = "";
+  public selectedDateTo: string = "";
   public dates: SelectionItem[] = [];
-  public selectedDate: string;
+  get datesTo(): SelectionItem[] {
+    return this.dates.filter( (date: SelectionItem) => {
+      return date.value >= this.selectedDateFrom;
+    } )
+  }
 
   public loadBar: boolean = false;
 
   public send(): void {
-    if (this.selectedDate) {
+    if (this.selectedDateFrom && this.selectedDateTo) {
       this.loadBar = true;
       let toSend: MonitoringReportForm = {
         companyID: this.user.companyID,
-        date: this.selectedDate
+        dateFrom: this.selectedDateFrom,
+        dateTo: this.selectedDateTo
       }
       console.log(toSend);
       this.mainService.downloadCourtReport(toSend).subscribe((result: ReportFileName) => {

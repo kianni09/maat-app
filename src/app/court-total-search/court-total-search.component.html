@@ -1,0 +1,98 @@
+<div class="main-root">
+    <div class="main-space">
+        <div class="head-block">
+            <div class="search-block">
+                <input (keyup.enter)="search(searchValue)" class="input-field" [(ngModel)]="searchValue" placeholder="Номер справи або текст справи">
+                <span *ngIf="searchValue" (click)="clearSearch()" class="material-icons clear-search-icon">close</span>
+                <div (click)="search(searchValue)" class="search-button">
+                    <span class="material-icons">search</span>
+                    <span class="button-label">Пошук</span>
+                </div>
+            </div>
+            <div *ngIf="!onLoad && resultSearch" class="result-block">
+                <div class="info">{{"Знайдено справ: " + resultSearch.totalCases}}</div>
+            </div>
+
+        </div>
+
+        <div *ngIf="!onLoad && resultSearch" class="subscription-block">
+            <div *ngFor="let case of resultSearch.cases" class="subscription-card-block">
+
+                <div class="subscription-card">
+
+                    <div class="info-block">
+                        <div class="category">Номер справи</div>
+                        <div (click)="getCasesByNumber(case.cause_number)" class="vp">{{case.cause_number}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Дата винесення рішення</div>
+                        <div class="info">{{case.adjudication_date}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Форма судочинства</div>
+                        <div class="info">{{case.judgment_name}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Форма судового рішення</div>
+                        <div class="info">{{case.justice_name}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Стадія розгляду</div>
+                        <div class="info">{{case.stage}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Назва суду</div>
+                        <div class="info">{{case.court_name}}</div>
+                    </div>
+
+                    <div class="info-block">
+                        <div class="category">Суддя</div>
+                        <div class="info">{{case.judge}}</div>
+                    </div>
+
+                    <div class="icons-block">
+                        <span (click)="openDocument(case.link)" class="material-icons document-icon">description</span>
+                    </div>
+
+
+                </div>
+
+            </div>
+        </div>
+
+        <div *ngIf="!onLoad && resultSearch && resultSearch.totalPages > 1" class="pages-block">
+            <div *ngIf="resultSearch.page > 1" (click)="pageMove('back')" class="arrow-button">
+                <span class="material-icons">arrow_back</span>
+            </div>
+
+            <div class="pages-numbers">{{resultSearch.page + " / " + resultSearch.totalPages}}</div>
+
+            <div *ngIf="resultSearch.totalPages > resultSearch.page" (click)="pageMove('forward')" class="arrow-button">
+                <span class="material-icons">arrow_forward</span>
+            </div>
+
+        </div>
+
+
+
+        <div *ngIf="!onLoad && !resultSearch" class="animation-back">
+            <div class="void-info">Інформація відсутня</div>
+        </div>
+
+        <div *ngIf="onLoad" class="animation-back">
+            <div class="spinner">
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+            </div>
+        </div>
+
+    </div>
+</div>

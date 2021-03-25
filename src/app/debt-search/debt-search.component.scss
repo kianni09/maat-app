@@ -8,7 +8,7 @@
         width: 100%;
         height: 100%;
         .head-block {
-            @include flex(row, space-between, center);
+            @include flex(column, null, null);
             width: calc(100% - 80px);
             padding: 20px 40px;
             background-color: $main-color;
@@ -16,39 +16,109 @@
             border-bottom-right-radius: $box-radius;
             box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
             z-index: 10;
-            .search-block {
-                @include flex(row, null, center);
-                position: relative;
-                .input-field {
-                    @include custom-input;
-                    @include custom-scrollbar;
-                    width: 300px;
-                    height: 30px;
-                    font-family: $font-family;
-                    font-size: 14px !important;
-                    resize: none;
-                }
-                .clear-search-icon {
-                    position: absolute;
-                    top: 7px;
-                    left: 285px;
-                    display: block;
-                    font-size: 25px;
-                    color: $text-main-color;
-                    cursor: pointer;
-                    transition: 0.3s;
-                    &:hover {
-                        color: $action-color
-                    }
-                }
-                .search-button {
-                    @include custom-button($text-main-color, $selection-color);
-                    margin-left: 20px;
+            transition: .4s;
+            .label-block {
+                @include flex(row, space-between, center);
+                width: 100%;
+                .swipe-button {
+                    @include custom-button($text-main-color, $text-secondary-color);
                     .button-label {
                         margin-left: 5px;
                     }
                     &:hover {
                         color: $main-color;
+                    }
+                }
+                .head-switcher {
+                    width: 200px;
+                    height: 40px;
+                    border: 1px solid $action-color;
+                    border-radius: $box-radius;
+                    position: relative;
+                    z-index: 1;
+                    .switcher-trigger {
+                        position: absolute;
+                        z-index: 5;
+                        width: 100px;
+                        height: 40px;
+                        border: 1px solid $action-color;
+                        border-radius: $box-radius;
+                        top: -1px;
+                        background-color: $action-color;
+                        transition: .4s;
+                    }
+                    .switcher-labels {
+                        @include flex(row, space-between, center);
+                        width: 200px;
+                        height: 40px;
+                        position: absolute;
+                        z-index: 10;
+                        .switcher-label {
+                            @include flex(row, center, center);
+                            width: 100px;
+                            height: 40px;
+                            color: $main-color;
+                            font-family: $font-family;
+                            cursor: pointer;
+                            user-select: none;
+                            transition: 0.4s;
+                            .label-icon {
+                                font-size: 30px !important;
+                            }
+                        }
+                    }
+                }
+            }
+            .search-block {
+                @include flex(column, null, center);
+                width: 100%;
+                position: relative;
+                margin-top: 20px;
+                .inputs-block {
+                    @include flex(row, null, center);
+                    flex-wrap: wrap;
+                    width: 100%;
+                    margin-bottom: 20px;
+                    .input-block {
+                        @include flex(column, null, null);
+                        width: 300px;
+                        margin: 0px 20px 20px 0px;
+                        .input-label {
+                            width: 100%;
+                            padding-bottom: 10px;
+                            font-family: $font-family;
+                            font-size: $main-text-size;
+                            color: $text-main-color;
+                        }
+                        .input-field {
+                            @include custom-input;
+                            @include custom-scrollbar;
+                            width: calc(100% - 14px);
+                            font-family: $font-family;
+                            resize: none;
+                        }
+                    }
+                }
+                .buttons-block {
+                    @include flex(row, space-between, center);
+                    width: 100%;
+                    .search-button {
+                        @include custom-button($text-main-color, $selection-color);
+                        .button-label {
+                            margin-left: 5px;
+                        }
+                        &:hover {
+                            color: $main-color;
+                        }
+                    }
+                    .clear-button {
+                        @include custom-button($text-main-color, $deccept-color);
+                        .button-label {
+                            margin-left: 5px;
+                        }
+                        &:hover {
+                            color: $main-color;
+                        }
                     }
                 }
             }
@@ -72,7 +142,6 @@
                     width: calc(100% - 80px);
                     box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
                     font-family: $font-family;
-                    cursor: pointer;
                     .info-block {
                         @include flex(column, null, null);
                         margin-bottom: 10px;
@@ -87,29 +156,34 @@
                             margin-top: 10px;
                             word-wrap: break-word;
                         }
+                        .vp {
+                            @include flex(row, null, center);
+                            font-size: $main-text-size;
+                            font-weight: 600;
+                            color: $selection-color;
+                            margin-top: 10px;
+                            word-wrap: break-word;
+                            cursor: pointer;
+                            .show-icon {
+                                font-size: $main-text-size;
+                                font-weight: 600;
+                                color: $selection-color;
+                            }
+                        }
                         &:nth-child(1) {
-                            width: 22%;
+                            width: 19%;
                         }
                         &:nth-child(2) {
-                            width: 22%;
+                            width: 19%;
                         }
                         &:nth-child(3) {
-                            width: 22%;
+                            width: 34%;
                         }
                         &:nth-child(4) {
-                            width: 22%;
+                            width: 14%;
                         }
                         &:nth-child(5) {
-                            width: 22%;
-                        }
-                        &:nth-child(6) {
-                            width: 22%;
-                        }
-                        &:nth-child(7) {
-                            width: 22%;
-                        }
-                        &:nth-child(8) {
-                            width: 22%;
+                            width: 9%;
                         }
                     }
                     .icons-block {
@@ -157,14 +231,12 @@
                         border-radius: $box-radius;
                         margin: 10px;
                         padding: 20px;
-                        width: calc(30% - 40px);
+                        width: calc(100% - 40px);
                         box-shadow: 0 1px 6px 0 rgba(32, 33, 36, .28);
                         font-family: $font-family;
-                        cursor: pointer;
                         .info-block {
                             @include flex(column, null, null);
                             flex: none;
-                            width: 40%;
                             margin-bottom: 10px;
                             .category {
                                 font-size: $addiction-text-size;
@@ -174,6 +246,18 @@
                                 font-size: $main-text-size;
                                 color: $text-main-color;
                                 margin-top: 10px
+                            }
+                            &:nth-child(1) {
+                                width: 29%;
+                            }
+                            &:nth-child(2) {
+                                width: 29%;
+                            }
+                            &:nth-child(3) {
+                                width: 29%;
+                            }
+                            &:nth-child(4) {
+                                width: 9%;
                             }
                         }
                     }
@@ -189,17 +273,18 @@
             .head-block {
                 width: calc(100% - 40px);
                 padding: 20px 20px;
-                .search-block {
-                    .input-field {
-                        width: 260px;
-                    }
-                    .clear-search-icon {
-                        left: 245px;
-                    }
-                    .search-button {
-                        margin-left: 10px;
+                .label-block {
+                    .swipe-button {
                         .button-label {
                             display: none;
+                        }
+                    }
+                }
+                .search-block {
+                    .inputs-block {
+                        .input-block {
+                            margin: 0px 0px 20px 0px;
+                            width: 100%;
                         }
                     }
                 }
@@ -217,21 +302,12 @@
                                 width: 100%;
                             }
                             &:nth-child(3) {
-                                width: 49%;
+                                width: 100%;
                             }
                             &:nth-child(4) {
-                                width: 49%;
+                                width: 100%;
                             }
                             &:nth-child(5) {
-                                width: 100%;
-                            }
-                            &:nth-child(6) {
-                                width: 100%;
-                            }
-                            &:nth-child(7) {
-                                width: 100%;
-                            }
-                            &:nth-child(8) {
                                 width: 100%;
                             }
                         }
@@ -247,6 +323,20 @@
                             @include flex(column, null, null);
                             margin: 10px 0px;
                             width: calc(80% - 40px);
+                            .info-block {
+                                &:nth-child(1) {
+                                    width: 100%;
+                                }
+                                &:nth-child(2) {
+                                    width: 100%;
+                                }
+                                &:nth-child(3) {
+                                    width: 100%;
+                                }
+                                &:nth-child(4) {
+                                    width: 100%;
+                                }
+                            }
                         }
                     }
                 }

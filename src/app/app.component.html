@@ -1,5 +1,38 @@
 <div class="root-background">
     <div class="root-workspace">
+        <div (clickOutside)="menuOff()" class="menu-window" [ngStyle]="{'top': menuStatus?'79px':'-500px'}">
+            <div class="menu-label-title">
+                <div class="title-icon">
+                    <span [ngStyle]="{'color': path[1] === 'start'? '#eb6e3d':'#161616'}" class="material-icons">home</span>
+                </div>
+                <div class="title-label">MAAT</div>
+            </div>
+            <a routerLink="/start/title" (click)="menuOff()" [ngStyle]="{'color': path[1] === 'start' && path[2] === 'title'? '#eb6e3d':'#161616'}" class="menu-label">Про сервіс</a>
+            <div class="menu-label-title">
+                <div class="title-icon">
+                    <span [ngStyle]="{'color': path[1] === 'court'? '#eb6e3d':'#161616'}" class="material-icons">account_balance</span>
+                </div>
+                <div class="title-label">Реєстр судових рішень</div>
+            </div>
+            <a routerLink="/court/search" (click)="menuOff()" [ngStyle]="{'color': path[1] === 'court' && path[2] === 'search'? '#eb6e3d':'#161616'}" class="menu-label">Пошук</a>
+            <div class="menu-label-title">
+                <div class="title-icon">
+                    <span [ngStyle]="{'color': path[1] === 'court-status'? '#eb6e3d':'#161616'}" class="material-icons">gavel</span>
+                </div>
+                <div class="title-label">Стан розгляду судових справ</div>
+            </div>
+            <a routerLink="/court-status/search" (click)="menuOff()" [ngStyle]="{'color': path[1] === 'court-status' && path[2] === 'search'? '#eb6e3d':'#161616'}" class="menu-label">Пошук</a>
+            <a routerLink="/court-status/monitoring" (click)="menuOff()" [ngStyle]="{'color': path[1] === 'court-status' && path[2] === 'monitoring'? '#eb6e3d':'#161616'}" class="menu-label">Моніторинг</a>
+            <div class="menu-label-title">
+                <div class="title-icon">
+                    <span [ngStyle]="{'color': path[1] === 'debt'? '#eb6e3d':'#161616'}" class="material-icons">account_balance_wallet</span>
+                </div>
+                <div class="title-label">Реєстр боржників</div>
+            </div>
+            <a routerLink="/debt/search" (click)="menuOff()" [ngStyle]="{'color': path[1] === 'debt' && path[2] === 'search'? '#eb6e3d':'#161616'}" class="menu-label">Пошук</a>
+            <!-- <div (click)="goTo('/debt/monitoring')" [ngStyle]="{'color': path[1] === 'debt' && path[2] === 'monitoring'? '#eb6e3d':'#161616'}" class="menu-label">Моніторинг</div> -->
+
+        </div>
         <div class="header-workspace">
             <app-header></app-header>
         </div>

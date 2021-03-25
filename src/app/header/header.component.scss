@@ -3,7 +3,7 @@
     @include flex(row, center, center);
     height: 100%;
     .header-main {
-        width: 100%;
+        width: calc(100% - 80px);
         height: 100%;
         margin: 0px 40px;
         @include flex(row, space-between, center);
@@ -14,6 +14,50 @@
                 margin-right: 10px;
                 font-size: 35px;
                 font-family: $logo-font;
+            }
+        }
+        .menu-block {
+            @include flex(row, null, center);
+            //width: 350px;
+            height: 100%;
+            position: relative;
+            z-index: 10;
+            cursor: pointer;
+            .menu-icon,
+            .close-icon {
+                .line {
+                    width: 30px;
+                    height: 3px;
+                    background-color: $main-color;
+                    margin: 5px 0px;
+                    transition: all 0.3s ease;
+                }
+            }
+            .close-icon {
+                .line:nth-child(1) {
+                    transform: translatey(8px) rotate(45deg);
+                }
+                .line:nth-child(2) {
+                    transform: scale(0);
+                }
+                .line:nth-child(3) {
+                    transform: translatey(-8px) rotate(-45deg);
+                }
+            }
+            .main-name {
+                font-family: $font-family;
+                color: $main-color;
+                font-size: $title-text-size;
+                font-weight: 600;
+                margin-left: 15px;
+            }
+            &:hover {
+                .menu-icon,
+                .close-icon {
+                    .line {
+                        background-color: $action-color;
+                    }
+                }
             }
         }
         .user-block {
@@ -61,8 +105,10 @@
 @media only screen and (max-width: 1000px) {
     .header-root {
         .header-main {
-            .logo-block {
-                .header-name {
+            width: calc(100% - 40px);
+            margin: 0px 20px;
+            .menu-block {
+                .main-name {
                     display: none;
                 }
             }
