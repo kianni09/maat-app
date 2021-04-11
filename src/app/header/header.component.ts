@@ -24,8 +24,16 @@ export class HeaderComponent implements OnInit {
     this.mainService.registrationWindow = true;
   }
 
+  get userOnLoad(): boolean {
+    return this.mainService.userOnLoad;
+  }
+
   get user(): User {
     return this.mainService.user;
+  }
+
+  get lineWidth (): string {
+    return (this.subscriptionsCount / this.user.queryLimit) * 100 + "%"
   }
 
   get subscriptionsCount(): number {
@@ -34,7 +42,8 @@ export class HeaderComponent implements OnInit {
 
   public menuHeaders = {
     start: {
-      title: "MAAT - Про сервіс"
+      title: "MAAT - Про сервіс",
+      user: "MAAT - Кабінет користувача"
     },
     "court": {
       search: "Реєстр судових рішень - Пошук"
@@ -63,6 +72,9 @@ export class HeaderComponent implements OnInit {
 
   }
 
+  public openCabinet(): void {
+    this.router.navigate(['start/user']);
+  }
 
 
   public exit() {

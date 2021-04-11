@@ -15,14 +15,27 @@
         </div>
 
         <div class="user-block">
-            <div *ngIf="!user" class="user-labels">
+            <div *ngIf="userOnLoad" class="spinner-loader">
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+            </div>
+
+            <div *ngIf="!user&&!userOnLoad" class="user-labels">
                 <div (click)="loginWindow()" class="login-button">Вхід</div>
                 <div (click)="registrationWindow()" class="registration-button">Реєстрація</div>
             </div>
             <div *ngIf="user" class="user-labels">
+                <span (click)="openCabinet()" class="material-icons user-icon">person_outline</span>
                 <div class="user-name-block">
-                    <div class="user-name">{{"Вітаємо, " + user.name}}</div>
+                    <!-- <div class="user-name">{{"Вітаємо, " + user.name}}</div> -->
+
                     <div class="query-limit">{{"Моніторинг: " + subscriptionsCount + " / " + user.queryLimit }}</div>
+                    <div class="query-limit-line">
+                        <div [ngStyle]="{'width': lineWidth}" class="active-line"></div>
+                    </div>
                 </div>
                 <span (click)="exit()" class="material-icons exit-icon">exit_to_app</span>
             </div>

@@ -6,9 +6,11 @@ import { DebtMonitoringComponent } from './debt-monitoring/debt-monitoring.compo
 import { DebtSearchComponent } from './debt-search/debt-search.component';
 import { CourtMonitoringComponent } from './main/main.component';
 import { TitleComponent } from './title/title.component';
+import { UserCabinetComponent } from './user-cabinet/user-cabinet.component';
 
 const routes: Routes = [
   { path: 'start/title', component: TitleComponent },
+  { path: 'start/user', component: UserCabinetComponent },
   { path: 'court/search', component: CourtTotalSearchComponent},
   { path: 'court-status/search', component: CourtSearchComponent},
   { path: 'court-status/monitoring', component: CourtMonitoringComponent},

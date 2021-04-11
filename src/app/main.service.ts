@@ -23,6 +23,7 @@ export class MainService {
   }
 
   public menuStatus: boolean = false;
+  public userOnLoad: boolean = false;
 
   public user: User;
   public loginWindow: boolean = false;
@@ -33,11 +34,13 @@ export class MainService {
 
   private UserLoad() {
     if (localStorage.getItem('MAATUser')) {
+      this.userOnLoad = true;
       this.getUserData$(localStorage.getItem('MAATUser')).subscribe(
         (user: User) => {
           console.log(user);
           this.user = user;
           this.getSubscriptions$(user.companyID);
+          this.userOnLoad = false;
           //this.router.navigate(['start/title']);
         }
       );

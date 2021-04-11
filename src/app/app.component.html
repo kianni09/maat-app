@@ -7,7 +7,10 @@
                 </div>
                 <div class="title-label">MAAT</div>
             </div>
+            <a routerLink="/start/user" (click)="menuOff()" [ngStyle]="{'color': path[1] === 'start' && path[2] === 'user'? '#eb6e3d':'#161616'}" class="menu-label">Кабінет користувача</a>
             <a routerLink="/start/title" (click)="menuOff()" [ngStyle]="{'color': path[1] === 'start' && path[2] === 'title'? '#eb6e3d':'#161616'}" class="menu-label">Про сервіс</a>
+
+
             <div class="menu-label-title">
                 <div class="title-icon">
                     <span [ngStyle]="{'color': path[1] === 'court'? '#eb6e3d':'#161616'}" class="material-icons">account_balance</span>

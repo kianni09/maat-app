@@ -19,6 +19,7 @@ import { DebtSearchComponent } from './debt-search/debt-search.component';
 import { DebtMonitoringComponent } from './debt-monitoring/debt-monitoring.component';
 import { DebtMonitoringAddComponent } from './debt-monitoring-add/debt-monitoring-add.component';
 import { CourtTotalSearchComponent } from './court-total-search/court-total-search.component';
+import { UserCabinetComponent } from './user-cabinet/user-cabinet.component';
 
 @NgModule({
   declarations: [
@@ -35,7 +36,8 @@ import { CourtTotalSearchComponent } from './court-total-search/court-total-sear
     DebtSearchComponent,
     DebtMonitoringComponent,
     DebtMonitoringAddComponent,
-    CourtTotalSearchComponent
+    CourtTotalSearchComponent,
+    UserCabinetComponent
   ],
   imports: [
     BrowserModule,

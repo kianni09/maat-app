@@ -308,3 +308,43 @@ $clr5: #ff805d;
         }
     }
 }
+
+.spinner-loader {
+    $animation-duration: 1000ms;
+    width: 180px;
+    height: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+    .spinner-item {
+        width: 9px;
+        height: 100%;
+        border-radius: 6px;
+        animation: spinner1 $animation-duration ease-in-out infinite;
+    }
+    @keyframes spinner1 {
+        50% {
+            transform: scaleY(0.25);
+        }
+    }
+    .spinner-item:nth-child(1) {
+        background-color: $clr1;
+        animation-delay: $animation-duration / 10;
+    }
+    .spinner-item:nth-child(2) {
+        background-color: $clr5;
+        animation-delay: $animation-duration / 10 * -1;
+    }
+    .spinner-item:nth-child(3) {
+        background-color: $clr3;
+        animation-delay: $animation-duration / 10 * -2;
+    }
+    .spinner-item:nth-child(4) {
+        background-color: $clr4;
+        animation-delay: $animation-duration / 10 * -3;
+    }
+    .spinner-item:nth-child(5) {
+        background-color: $clr2;
+        animation-delay: $animation-duration / 10 * -4;
+    }
+}
