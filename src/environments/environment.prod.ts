@@ -1,4 +1,4 @@
-const link = "http://95.181.178.7:3658/"
+const link = "http://46.253.132.73:3658/"
 
 export const environment = {
   production: true,
