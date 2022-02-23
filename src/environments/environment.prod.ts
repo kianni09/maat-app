@@ -5,6 +5,7 @@ export const environment = {
 
   registration: link + "user/registration/",
   login: link + "user/login/",
+  changePassword: link + "user/change-password/",
   getUserData: link + "user?userID=",
   checkUserLogin: link + "user/login-check?login=",
   checkCompanyID: link + "user/company-check?companyID=",
@@ -24,5 +25,11 @@ export const environment = {
   getVP: link + "search/debt/vp?number=",
 
   searchCourtCases: link + "search/court-cases?",
+
+  searchCompany: link + "search/company?value=",
+  getCompany: link + "get/company/",
+
+  addCompanyToMonitoring: link + "company/monitoring/add/",
+  deleteCompanyFromMonitoring: link + "company/monitoring/delete/"
 
 };

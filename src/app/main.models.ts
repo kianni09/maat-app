@@ -1,6 +1,7 @@
 export interface User {
   userID: string,
-  name: string,
+  login: string,
+  name?: string,
   companyID?: string,
   companyName?: string,
   queryLimit?: number
@@ -206,4 +207,35 @@ export interface CaseSearchResult {
   totalCases: number,
   query: string,
   cases: CaseItem[]
+}
+
+export interface CompanyShort {
+  hash_key: string,
+  edrpou: string,
+  name_short: string
+}
+
+export interface Company {
+  hash_key: string,
+  edrpou: string,
+  name_short: string,
+  status: string,
+  registration_date: string,
+  address: string,
+  kinds: string[],
+  capital: string,
+  founders: string[],
+  head: string,
+  contacts: string,
+  monitoring: boolean
+}
+
+export interface CompanyGet {
+  hash_key: string,
+  user_id: string
+}
+
+export interface MonitoringAction {
+  key: string,
+  user_id: string
 }

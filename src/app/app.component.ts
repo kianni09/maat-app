@@ -11,6 +11,16 @@ import { Router } from '@angular/router';
 export class AppComponent {
   constructor(private mainService: MainService, private location: Location, private router: Router) { }
 
+  get windowOpen (): boolean {
+    return this.loginWindow
+    || this.registrationWindow
+    || this.subscriptionWindow
+    || this.documentsWindow
+    || this.reportWindow
+    || this.changePasswordWindow
+    || this.companyDocumentWindow
+  }
+
   get loginWindow () {
     return this.mainService.loginWindow;
   }
@@ -28,6 +38,13 @@ export class AppComponent {
   }
   get reportWindow () {
     return this.mainService.reportWindow;
+  }
+  get changePasswordWindow () {
+    return this.mainService.changePasswordWindow;
+  }
+
+  get companyDocumentWindow () {
+    return this.mainService.companyDocumentWindow;
   }
 
   public goTo(location: string): void {

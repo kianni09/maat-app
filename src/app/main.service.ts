@@ -1,10 +1,15 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable, Subject } from 'rxjs';
+import { BehaviorSubject, Observable, Subject, of } from 'rxjs';
+import { map } from 'rxjs/operators';
 import { environment } from '../environments/environment.prod';
 import { Router } from '@angular/router';
 import { Location } from '@angular/common';
 import { HttpClient } from '@angular/common/http';
-import { LoginForm, RegistrationForm, User, Subscription, SubscriptionAddForm, SubscriptionAddAnswer, DocumentsForm, SubscriptionDeleteForm, SubscriptionUserForm, MonitoringReportForm, DebtSearchForm } from './main.models';
+import { LoginForm, RegistrationForm, User,
+  Subscription, SubscriptionAddForm, SubscriptionAddAnswer,
+  DocumentsForm, SubscriptionDeleteForm, SubscriptionUserForm,
+  MonitoringReportForm, DebtSearchForm,
+  Company, CompanyShort, CompanyGet, MonitoringAction } from './main.models';
 
 @Injectable({
   providedIn: 'root',
@@ -26,11 +31,15 @@ export class MainService {
   public userOnLoad: boolean = false;
 
   public user: User;
+  public userSubject$: BehaviorSubject<User> = new BehaviorSubject(undefined);
+
   public loginWindow: boolean = false;
   public registrationWindow: boolean = false;
   public subscriptionWindow: boolean = false;
   public documentsWindow: boolean = false;
   public reportWindow: boolean = false;
+  public changePasswordWindow: boolean = false;
+  public companyDocumentWindow: boolean = false;
 
   private UserLoad() {
     if (localStorage.getItem('MAATUser')) {
@@ -39,6 +48,7 @@ export class MainService {
         (user: User) => {
           console.log(user);
           this.user = user;
+          this.userSubject$.next(user);
           this.getSubscriptions$(user.companyID);
           this.userOnLoad = false;
           //this.router.navigate(['start/title']);
@@ -67,6 +77,10 @@ export class MainService {
 
   public registration$(registrationForm: RegistrationForm): Observable<any> {
     return this.http.post(environment.registration, registrationForm);
+  }
+
+  public changeUserPassword$ (user: LoginForm): Observable<boolean> {
+    return this.http.post<boolean>(environment.changePassword, user);
   }
 
   public startLoadSubscriptions: boolean = true;
@@ -141,6 +155,24 @@ export class MainService {
     let q = "query=" + query;
     let p = "&page=" + page
     return this.http.get(environment.searchCourtCases + q + p);
+  }
+
+  public searchCompany$(data: string): Observable<CompanyShort[]> {
+    return this.http.get<CompanyShort[]>(environment.searchCompany + data)
+  }
+
+  public getCompany$(data: CompanyGet): Observable<Company> {
+    return this.http.post<Company>(environment.getCompany, data);
+  }
+
+  public selectedCompany: CompanyGet = undefined;
+
+  public addCompanyToMonitoring$(data: MonitoringAction): Observable<boolean> {
+    return this.http.post<boolean>(environment.addCompanyToMonitoring, data);
+  }
+
+  public deleteCompanyFromMonitoring$(data: MonitoringAction): Observable<boolean> {
+    return this.http.post<boolean>(environment.deleteCompanyFromMonitoring, data);
   }
 
 }

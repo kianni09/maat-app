@@ -1,0 +1,86 @@
+@import "../app.component.scss";
+.window {
+    width: 600px;
+    height: 80vh;
+    padding: 60px 40px;
+    border-radius: $box-radius;
+    background-color: $main-color;
+    font-family: $font-family;
+    position: relative;
+    .monitoring-icon {
+        display: block;
+        position: absolute;
+        top: 5px;
+        left: 5px;
+        font-size: 35px;
+        color: $text-secondary-color;
+        transition: 0.4s;
+        cursor: pointer;
+        &:hover {
+            color: $action-color;
+        }
+    }
+    .close-icon {
+        display: block;
+        position: absolute;
+        top: 5px;
+        right: 5px;
+        font-size: 35px;
+        color: $text-secondary-color;
+        transition: 0.4s;
+        cursor: pointer;
+        &:hover {
+            color: $action-color;
+        }
+    }
+    .document-container {
+        @include custom-scrollbar;
+        width: 100%;
+        height: 100%;
+        .document-body {
+            @include flex(column, null, null);
+            width: 100%;
+            height: 100%;
+            .document-row {
+                display: grid;
+                grid-template-columns: 1fr 3fr;
+                margin-bottom: 10px;
+                .category-name {
+                    color: $text-secondary-color;
+                    font-size: $main-text-size;
+                    margin-right: 10px;
+                }
+                .category-item {
+                    color: $text-main-color;
+                    font-size: $main-text-size;
+                }
+                .category-items {
+                    @include flex(column, null, null);
+                    .category-item {
+                        color: $text-main-color;
+                        font-size: $main-text-size;
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+        }
+    }
+}
+
+@media only screen and (max-width: 1000px) {
+    .window {
+        width: calc(90vw - 40px);
+        padding: 40px 20px;
+        .document-container {
+            .document-body {
+                .document-row {
+                    grid-template-columns: 1fr;
+                    .category-name {
+                        margin-right: 0px;
+                        margin-bottom: 5px;
+                    }
+                }
+            }
+        }
+    }
+}

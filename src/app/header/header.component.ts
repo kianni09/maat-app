@@ -45,6 +45,10 @@ export class HeaderComponent implements OnInit {
       title: "MAAT - Про сервіс",
       user: "MAAT - Кабінет користувача"
     },
+    company: {
+      search: "Реєстр юридичних осіб - Пошук",
+      monitoring: "Реєстр юридичних осіб - Моніторинг"
+    },
     "court": {
       search: "Реєстр судових рішень - Пошук"
     },
@@ -53,8 +57,8 @@ export class HeaderComponent implements OnInit {
       monitoring: "Стан розгляду судових справ - Моніторинг"
     },
     "debt": {
-      search: "Реєстр боржників - Пошук",
-      monitoring: "Реєстр боржників - Моніторинг"
+      search: "Реєстр боржників та АСВП - Пошук",
+      monitoring: "Реєстр боржників та АСВП - Моніторинг"
     }
   }
 

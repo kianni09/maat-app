@@ -1,5 +1,7 @@
 import { NgModule } from '@angular/core';
 import { Routes, RouterModule } from '@angular/router';
+import { CompanyMonitoringComponent } from './company-monitoring/company-monitoring.component';
+import { CompanySearchComponent } from './company-search/company-search.component';
 import { CourtSearchComponent } from './court-search/court-search.component';
 import { CourtTotalSearchComponent } from './court-total-search/court-total-search.component';
 import { DebtMonitoringComponent } from './debt-monitoring/debt-monitoring.component';
@@ -16,6 +18,8 @@ const routes: Routes = [
   { path: 'court-status/monitoring', component: CourtMonitoringComponent},
   { path: 'debt/search', component: DebtSearchComponent},
   { path: 'debt/monitoring', component: DebtMonitoringComponent},
+  { path: 'company/search', component: CompanySearchComponent},
+  { path: 'company/monitoring', component: CompanyMonitoringComponent},
   { path: '**', redirectTo: 'start/title' },
 ];
 

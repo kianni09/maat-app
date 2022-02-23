@@ -1,0 +1,43 @@
+<div class="main-root">
+    <div class="main-space">
+
+        <div class="head-block">
+
+            <form [formGroup]="searchFormGroup" novalidate (ngSubmit)="search()" class="search-block">
+
+                <input formControlName="searchField" [placeholder]="placeholderInfo" class="input-field" type="text">
+
+                <button type="submit" [disabled]="searchFormGroup.invalid" class="search-button">
+                    <span class="material-icons">search</span>
+                    <span class="button-label">Пошук</span>
+                </button>
+            </form>
+
+        </div>
+
+        <div *ngIf="!loadData && searchResult.length" class="search-results">
+            <div class="companies-block">
+                <div (click)="openCompanyDocument(company.hash_key)" *ngFor="let company of searchResult" class="companies-card">
+                    <div class="company-name">{{company.name_short}}</div>
+                    <div class="company-edrpou">{{company.edrpou}}</div>
+                </div>
+            </div>
+        </div>
+
+
+        <div *ngIf="!loadData && !searchResult.length" class="animation-back">
+            <div class="void-info">Інформація відсутня</div>
+        </div>
+
+        <div *ngIf="loadData" class="animation-back">
+            <div class="spinner">
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+                <div class="spinner-item"></div>
+            </div>
+        </div>
+
+    </div>
+</div>

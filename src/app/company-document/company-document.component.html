@@ -1,0 +1,71 @@
+<div class="window">
+    <span *ngIf="dataLoad" (click)="monitoringAction()" class="material-icons monitoring-icon">{{company.monitoring?"turned_in":"turned_in_not"}}</span>
+    <span (click)="closeWindow()" class="material-icons close-icon">close</span>
+
+    <div *ngIf="dataLoad" class="document-container">
+        <div class="document-body">
+
+            <div class="document-row">
+                <div class="category-name">Назва:</div>
+                <div class="category-item">{{company.name_short + " (" + company.edrpou + ")"}}</div>
+            </div>
+
+            <div class="document-row">
+                <div class="category-name">Статус:</div>
+                <div class="category-item">{{company.status}}</div>
+            </div>
+
+            <div class="document-row">
+                <div class="category-name">Дата реєстрації:</div>
+                <div class="category-item">{{company.registration_date | date: "dd.MM.yyyy" }}</div>
+            </div>
+
+            <div class="document-row">
+                <div class="category-name">Адреса:</div>
+                <div class="category-item">{{company.address}}</div>
+            </div>
+
+            <div class="document-row">
+                <div class="category-name">Статутний капітал:</div>
+                <div class="category-item">{{(company.capital | number: "2.").replace(comaReplacePattern, " ") + " грн."}}</div>
+            </div>
+
+            <div class="document-row">
+                <div class="category-name">КВЕД:</div>
+                <div class="category-items">
+                    <div *ngFor="let kind of company.kinds" class="category-item">{{kind}}</div>
+                </div>
+            </div>
+
+            <div class="document-row">
+                <div class="category-name">Засновники:</div>
+                <div class="category-items">
+                    <div *ngFor="let founder of company.founders" class="category-item">{{founder}}</div>
+                </div>
+            </div>
+
+            <div class="document-row">
+                <div class="category-name">Керівник:</div>
+                <div class="category-item">{{company.head}}</div>
+            </div>
+
+            <div class="document-row">
+                <div class="category-name">Контакти:</div>
+                <div class="category-item">{{company.contacts}}</div>
+            </div>
+
+        </div>
+    </div>
+
+    <div *ngIf="!dataLoad" class="animation-back">
+        <div class="spinner">
+            <div class="spinner-item"></div>
+            <div class="spinner-item"></div>
+            <div class="spinner-item"></div>
+            <div class="spinner-item"></div>
+            <div class="spinner-item"></div>
+        </div>
+    </div>
+
+
+</div>

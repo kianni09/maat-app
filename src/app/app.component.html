@@ -3,12 +3,12 @@
         <div (clickOutside)="menuOff()" class="menu-window" [ngStyle]="{'top': menuStatus?'79px':'-500px'}">
             <div class="menu-label-title">
                 <div class="title-icon">
-                    <span [ngStyle]="{'color': path[1] === 'start'? '#eb6e3d':'#161616'}" class="material-icons">home</span>
+                    <span [ngStyle]="{'color': path[1] === 'company'? '#eb6e3d':'#161616'}" class="material-icons">business</span>
                 </div>
-                <div class="title-label">MAAT</div>
+                <div class="title-label">Реєстр юридичних осіб</div>
             </div>
-            <a routerLink="/start/user" (click)="menuOff()" [ngStyle]="{'color': path[1] === 'start' && path[2] === 'user'? '#eb6e3d':'#161616'}" class="menu-label">Кабінет користувача</a>
-            <a routerLink="/start/title" (click)="menuOff()" [ngStyle]="{'color': path[1] === 'start' && path[2] === 'title'? '#eb6e3d':'#161616'}" class="menu-label">Про сервіс</a>
+            <a routerLink="/company/search" (click)="menuOff()" [ngStyle]="{'color': path[1] === 'company' && path[2] === 'search'? '#eb6e3d':'#161616'}" class="menu-label">Пошук</a>
+            <a routerLink="/company/monitoring" (click)="menuOff()" [ngStyle]="{'color': path[1] === 'company' && path[2] === 'monitoring'? '#eb6e3d':'#161616'}" class="menu-label">Моніторинг</a>
 
 
             <div class="menu-label-title">
@@ -30,7 +30,7 @@
                 <div class="title-icon">
                     <span [ngStyle]="{'color': path[1] === 'debt'? '#eb6e3d':'#161616'}" class="material-icons">account_balance_wallet</span>
                 </div>
-                <div class="title-label">Реєстр боржників</div>
+                <div class="title-label">Реєстр боржників та АСВП</div>
             </div>
             <a routerLink="/debt/search" (click)="menuOff()" [ngStyle]="{'color': path[1] === 'debt' && path[2] === 'search'? '#eb6e3d':'#161616'}" class="menu-label">Пошук</a>
             <!-- <div (click)="goTo('/debt/monitoring')" [ngStyle]="{'color': path[1] === 'debt' && path[2] === 'monitoring'? '#eb6e3d':'#161616'}" class="menu-label">Моніторинг</div> -->
@@ -44,12 +44,14 @@
         </div>
     </div>
 
-    <div *ngIf="loginWindow || registrationWindow || subscriptionWindow || documentsWindow || reportWindow" class="windows-background">
+    <div *ngIf="windowOpen" class="windows-background">
         <app-login *ngIf="loginWindow"></app-login>
         <app-registration *ngIf="registrationWindow"></app-registration>
         <app-subscription *ngIf="subscriptionWindow"></app-subscription>
         <app-documents *ngIf="documentsWindow"></app-documents>
         <app-court-report *ngIf="reportWindow"></app-court-report>
+        <app-change-password *ngIf="changePasswordWindow"></app-change-password>
+        <app-company-document *ngIf="companyDocumentWindow"></app-company-document>
     </div>
 
 
